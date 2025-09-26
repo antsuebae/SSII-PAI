@@ -10,5 +10,9 @@
   "juan": {
     "password_hash": "454c9cfcc8858e5b312f5ba721a2c387747fc223a0163c32b4f16606508ab29b",
     "salt": "2bb4a2390a84c7b4ce4b2936d0ab528223cf7e7ba6d7c24bb56e7522a7f582f6"
+  },
+  "javi": {
+    "password_hash": "aedb8f5f11c0d1fb3ab876abbb614dc4398e86ad4858481cb00cef654a567732",
+    "salt": "c4ff53f69439bfa23031e2bdd87b19c437384c440ee369f0b0ceaf9648df9385"
   }
 }
