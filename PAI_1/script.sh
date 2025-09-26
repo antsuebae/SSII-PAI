@@ -49,9 +49,10 @@ python3 "$SRC_DIR/client.py"
 
 # Opcional: al salir del cliente, preguntar si se quiere detener el servidor
 echo ""
-read -p "¿Quieres detener el servidor (PID $SERVER_PID)? [y/N]: " -n 1 -r
+read -p "¿Quieres detener el servidor (PID $SERVER_PID)? [Y/n]: " -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+# Si no se ingresó nada (solo Enter), asumimos "Y"
+if [[ -z "$REPLY" || "$REPLY" =~ ^[Yy]$ ]]; then
     kill $SERVER_PID 2>/dev/null
     echo "🛑 Servidor detenido."
 fi

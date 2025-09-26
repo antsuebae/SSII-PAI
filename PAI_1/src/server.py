@@ -166,7 +166,7 @@ if __name__ == "__main__":
     server.bind(("127.0.0.1", 8888))
     server.listen(5)
     print("🏦 Servidor iniciado en 127.0.0.1:8888")
-    print("Usuarios preexistentes: paco (pass: pepe), paco (pass: pepe)")
+    print("Usuarios preexistentes: paco (pass: pepe), pepe (pass: paco)")
     try:
         while True:
             conn, addr = server.accept()
