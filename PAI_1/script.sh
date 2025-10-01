@@ -30,6 +30,8 @@ python3 "$SRC_DIR/server.py" > "$SERVER_LOG" 2>&1 &
 
 SERVER_PID=$!
 
+echo "Usuarios preexistentes: paco (pass: pepe), pepe (pass: paco)"
+
 # Esperar un poco para que el servidor se inicie
 sleep 2
 

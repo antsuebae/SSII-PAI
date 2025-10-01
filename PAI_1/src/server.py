@@ -35,11 +35,11 @@ def verify_mac(data: str, nonce: str, received_mac: str) -> bool:
 def load_users():
     if not os.path.exists(USERS_FILE):
         os.makedirs(os.path.dirname(USERS_FILE), exist_ok=True)
-        pwd1, salt1 = hash_password("admin123")
-        pwd2, salt2 = hash_password("cliente123")
+        pwd1, salt1 = hash_password("pepe")
+        pwd2, salt2 = hash_password("paco")
         default_users = {
-            "admin": {"password_hash": pwd1, "salt": salt1},
-            "cliente01": {"password_hash": pwd2, "salt": salt2}
+            "paco": {"password_hash": pwd1, "salt": salt1},
+            "pepe": {"password_hash": pwd2, "salt": salt2}
         }
         with open(USERS_FILE, "w") as f:
             json.dump(default_users, f, indent=2)
