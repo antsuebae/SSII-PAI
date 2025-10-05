@@ -14,5 +14,13 @@
   "javi": {
     "password_hash": "aedb8f5f11c0d1fb3ab876abbb614dc4398e86ad4858481cb00cef654a567732",
     "salt": "c4ff53f69439bfa23031e2bdd87b19c437384c440ee369f0b0ceaf9648df9385"
+  },
+  "jose": {
+    "password_hash": "8f3a027e1a84cbacd3bc70651ce453b733bf566584f407e6185567bcd8f02235",
+    "salt": "bd4f63d8598dcc98b5b63c42a4a1ebcb5a3a31c6df006621b5b87702ea7bebc1"
+  },
+  "antonio": {
+    "password_hash": "3e8316e12f37286bd28e67ba30b64d4130faeb2ff42fa6a36c67364de1bc557a",
+    "salt": "f1b91faf5c824ccbd3f5d68b38f05a06feea96ae9f41d2fc372ab4c528d6d61b"
   }
 }
