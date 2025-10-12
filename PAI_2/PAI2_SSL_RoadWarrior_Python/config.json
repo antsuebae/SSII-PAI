@@ -1,0 +1,17 @@
+{
+  "host": "127.0.0.1",
+  "port_tls": 4444,
+  "port_plain": 4445,
+  "db_path": "data/app.db",
+  "certfile": "certs/server.crt",
+  "keyfile": "certs/server.key",
+  "tls_min_version": "TLSv1.3",
+  "tls_cipher_suites": "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256",
+  "message_max_len": 144,
+  "lockout": {
+    "max_failures": 5,
+    "window_seconds": 600,
+    "lock_seconds": 900
+  },
+  "initial_users_file": "data/initial_users.json"
+}

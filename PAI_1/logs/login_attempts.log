@@ -7,3 +7,5 @@
 [2025-10-05 21:13:12] user=javi success=False from ('127.0.0.1', 41416) (total: success=0 failure=1)
 [2025-10-05 21:13:19] user=javi success=False from ('127.0.0.1', 41416) (total: success=0 failure=2)
 [2025-10-05 21:13:23] user=javi success=True from ('127.0.0.1', 41416) (total: success=1 failure=2)
+[2025-10-06 17:28:29] user=javi success=True from ('127.0.0.1', 54804) (total: success=1 failure=0)
+[2025-10-06 17:29:54] user=javi success=True from ('127.0.0.1', 48008) (total: success=1 failure=0)
