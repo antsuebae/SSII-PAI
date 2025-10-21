@@ -8,7 +8,7 @@ Uso:
     ./PAI2_single_run.py
 """
 import asyncio, ssl, json, sqlite3, os, sys, time, hashlib, base64, logging, subprocess, textwrap
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -26,11 +26,16 @@ CONFIG = {
     "certfile": str(CERTS_DIR / "server.crt"),
     "keyfile": str(CERTS_DIR / "server.key"),
     "message_max_len": 144,
-    "lockout": {"max_failures":5, "window_seconds":600, "lock_seconds":900}
+    "lockout": {"max_failures":5, "window_seconds":600, "lock_seconds":900},
+    # >>> NUEVO: perfil de cifrado seleccionable ('normal' | 'robust'). Por defecto, robusto.
+    "cipher_profile": os.environ.get("PAI2_CIPHERS", "robust").lower()
 }
 
 SERVER_LOG = LOGS_DIR / "server.log"
 logging.basicConfig(filename=str(SERVER_LOG), level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+# >>> NUEVO: referencia global a la tarea del servidor para poder reiniciarlo al cambiar perfil
+SERVER_TASK = None
 
 # ---------- Generación automática de certificados ----------
 def ensure_certs():
@@ -80,7 +85,7 @@ def init_db():
         try:
             salt = os.urandom(16)
             ph = scrypt_hash(p, salt)
-            cur.execute("INSERT INTO users VALUES(?,?,?,?)",(u,ph,salt,datetime.utcnow().isoformat()))
+            cur.execute("INSERT INTO users VALUES(?,?,?,?)",(u,ph,salt,datetime.now(timezone.utc).isoformat()))
         except sqlite3.IntegrityError:
             pass
     con.commit(); con.close()
@@ -95,7 +100,7 @@ def verify_user(cur,u,p):
 
 def add_user(cur,u,p):
     salt=os.urandom(16)
-    cur.execute("INSERT INTO users VALUES(?,?,?,?)",(u,scrypt_hash(p,salt),salt,datetime.utcnow().isoformat()))
+    cur.execute("INSERT INTO users VALUES(?,?,?,?)",(u,scrypt_hash(p,salt),salt,datetime.now(timezone.utc).isoformat()))
 
 def record_message(cur,u,m):
     cur.execute("INSERT INTO messages(username,message,created_at) VALUES(?,?,?)",(u,m,datetime.utcnow().isoformat()))
@@ -104,11 +109,23 @@ def count_messages(cur,u):
     r=cur.execute("SELECT COUNT(*) FROM messages WHERE username=?",(u,)).fetchone()
     return r[0] if r else 0
 
-class Session: 
+class Session:
     def __init__(self): self.username=None
 
 async def handle_client(r,w):
-    ip=w.get_extra_info("peername")[0]
+    ip = w.get_extra_info("peername")[0]
+    # >>> NUEVO: imprimir versión TLS y suite negociada al conectar
+    sslobj = w.get_extra_info("ssl_object")
+    if sslobj:
+        tls_ver = getattr(sslobj, "version", lambda: "UNKNOWN")()
+        cipher_info = getattr(sslobj, "cipher", lambda: ("UNKNOWN", "", 0))()
+        # cipher_info es (cipher_name, protocol, secret_bits) en CPython/OpenSSL
+        cipher_name = cipher_info[0] if isinstance(cipher_info, (tuple, list)) else str(cipher_info)
+        msg = f"🔐 Conexión entrante desde {ip} — TLS={tls_ver}, Cipher={cipher_name}"
+        print(msg); logging.info(msg)
+        # Si quieres exigir explícitamente TLS 1.3, puedes comprobarlo y cerrar si no cumple:
+        # if tls_ver != "TLSv1.3": w.close(); await w.wait_closed(); return
+
     s=Session(); con=sqlite3.connect(DB_PATH); cur=con.cursor()
     try:
         while True:
@@ -131,7 +148,7 @@ async def handle_client(r,w):
                     lst[:]=[t for t in lst if t>=now_ts()-CONFIG["lockout"]["window_seconds"]]
                     if len(lst)>=CONFIG["lockout"]["max_failures"]:
                         locked_until[key]=now_ts()+CONFIG["lockout"]["lock_seconds"]; failed_attempts[key]=[]
-                        await send(w,{"status":"error","msg":"locked"}); 
+                        await send(w,{"status":"error","msg":"locked"})
                     else: await send(w,{"status":"error","msg":"bad_credentials"})
             elif a=="logout": s.username=None; await send(w,{"status":"ok","msg":"logged_out"})
             elif a=="send_message":
@@ -150,6 +167,36 @@ async def handle_client(r,w):
 
 async def send(w,o): w.write((json.dumps(o)+"\n").encode()); await w.drain()
 
+# >>> NUEVO: helper para aplicar perfiles de cifrado al SSLContext
+def apply_cipher_profile(ctx: ssl.SSLContext, profile: str):
+    """
+    Aplica un perfil de cifrado 'normal' o 'robust' al contexto.
+    - Para TLS 1.3: si la plataforma soporta set_ciphersuites, restringe cuando profile='robust'.
+    - Para < TLS 1.3: usa set_ciphers con expresiones OpenSSL.
+    """
+    profile = (profile or "robust").lower()
+    # TLS 1.3 ciphersuites: (si está disponible)
+    try:
+        if hasattr(ctx, "set_ciphersuites"):
+            if profile == "robust":
+                # Restringe a suites fuertes y comunes en TLS 1.3
+                ctx.set_ciphersuites("TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256")
+            else:
+                # "normal": no restringimos explícitamente las TLS 1.3 (deja las default del sistema)
+                pass
+    except Exception:
+        pass
+
+    # TLS 1.2 y anteriores (afecta sólo si se negocia <1.3)
+    try:
+        if profile == "robust":
+            ctx.set_ciphers("ECDHE+AESGCM:ECDHE+CHACHA20")
+        else:
+            # normal: conjunto alto, evitando algoritmos inseguros
+            ctx.set_ciphers("HIGH:!aNULL:!MD5:!RC4")
+    except Exception:
+        pass
+
 def tls_context_server():
     c = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     # Intenta TLS 1.3; si no está disponible, baja a 1.2
@@ -157,17 +204,14 @@ def tls_context_server():
         c.minimum_version = ssl.TLSVersion.TLSv1_3
     except Exception:
         c.minimum_version = ssl.TLSVersion.TLSv1_2
-    # ¡IMPORTANTE! No fijes suites TLS 1.3 con set_ciphers; no es aplicable.
-    # Si quieres restringir suites en < TLS1.3, usa un perfil genérico robusto:
-    try:
-        c.set_ciphers("ECDHE+AESGCM:ECDHE+CHACHA20")
-    except Exception:
-        pass
+
+    # >>> NUEVO: aplicar perfil de cifrado seleccionado
+    apply_cipher_profile(c, CONFIG.get("cipher_profile", "robust"))
+
     c.load_cert_chain(CONFIG["certfile"], CONFIG["keyfile"])
     c.check_hostname = False
     c.verify_mode = ssl.CERT_NONE
     return c
-
 
 async def start_server():
     init_db()
@@ -178,10 +222,9 @@ async def start_server():
     except Exception as e:
         print(f"❌ Error iniciando servidor TLS: {e}")
         raise
-    print(f"🚀 Servidor TLS escuchando en {CONFIG['host']}:{CONFIG['port_tls']}")
+    print(f"🚀 Servidor TLS escuchando en {CONFIG['host']}:{CONFIG['port_tls']} (perfil cifrado: {CONFIG.get('cipher_profile')})")
     async with srv:
         await srv.serve_forever()
-
 
 # ---------- Servidor NO-TLS (baseline) ----------
 async def handle_plain(r,w):
@@ -212,6 +255,16 @@ class ClientSession:
         if self.connected: return True
         try:
             self.reader,self.writer=await asyncio.open_connection(CONFIG["host"],CONFIG["port_tls"],ssl=tls_context_client())
+            # >>> NUEVO: informar versión y cipher desde el lado cliente también (opcional)
+            try:
+                sslobj = self.writer.get_extra_info("ssl_object")
+                if sslobj:
+                    tls_ver = getattr(sslobj, "version", lambda: "UNKNOWN")()
+                    cipher_info = getattr(sslobj, "cipher", lambda: ("UNKNOWN", "", 0))()
+                    cipher_name = cipher_info[0] if isinstance(cipher_info, (tuple, list)) else str(cipher_info)
+                    print(f"🤝 Cliente conectado — TLS={tls_ver}, Cipher={cipher_name}")
+            except Exception:
+                pass
             self.connected=True; return True
         except Exception as e: print("⚠️ No se pudo conectar:",e); return False
     async def send(self,obj):
@@ -273,6 +326,7 @@ async def benchmark_tls_vs_plain(req=500,conc=100):
 
 # ---------- Interfaz ----------
 async def repl_loop():
+    global SERVER_TASK
     c = ClientSession()
 
     # Espera activa hasta que el servidor TLS esté escuchando (127.0.0.1:4444)
@@ -288,6 +342,7 @@ async def repl_loop():
     await c.connect()
 
     print("\nUsuarios preexistentes: paco(pepe), pepe(paco), alice/bob/carol")
+    print(f"🔧 Perfil de cifrado actual: {CONFIG.get('cipher_profile')}")
     print("💬 Interfaz cliente:\n")
     menu = textwrap.dedent("""
     1. Registrar
@@ -298,6 +353,7 @@ async def repl_loop():
     6. Salir
     7. Prueba de capacidad (TLS ~300)
     8. Comparativa rendimiento (TLS vs NO-TLS)
+    9. Cambiar perfil de cifrado (normal/robust) y reiniciar servidor TLS
     """)
     while True:
         print(menu)
@@ -324,6 +380,24 @@ async def repl_loop():
             r = input("Peticiones [500]: ") or "500"
             c2 = input("Concurrencia [100]: ") or "100"
             await benchmark_tls_vs_plain(int(r), int(c2))
+        elif o == "9":
+            newp = input(f"Perfil (normal/robust) [actual: {CONFIG.get('cipher_profile')}]: ").strip().lower()
+            if newp in ("normal","robust"):
+                if newp != CONFIG.get("cipher_profile"):
+                    print(f"♻️ Reiniciando servidor TLS con perfil: {newp} ...")
+                    CONFIG["cipher_profile"] = newp
+                    if SERVER_TASK:
+                        SERVER_TASK.cancel()
+                        await asyncio.sleep(0.2)
+                    SERVER_TASK = asyncio.create_task(start_server())
+                    await asyncio.sleep(0.6)  # pequeña espera para que quede escuchando
+                    # Re-conectar cliente para que negocie con el nuevo perfil
+                    await c.close()
+                    await c.connect()
+                else:
+                    print("Sin cambios (mismo perfil).")
+            else:
+                print("Perfil no válido. Usa 'normal' o 'robust'.")
         elif o in ("6","exit","q","quit"):
             await c.close()
             print("Saliendo...")
@@ -331,14 +405,18 @@ async def repl_loop():
         else:
             print("Opción no válida")
 
-
 # ---------- Main ----------
 async def main():
+    global SERVER_TASK
     if not ensure_certs(): return
-    srv=asyncio.create_task(start_server())
+    SERVER_TASK = asyncio.create_task(start_server())
     await asyncio.sleep(0.5)
-    try: await repl_loop()
-    finally: srv.cancel(); await asyncio.sleep(0.2)
+    try:
+        await repl_loop()
+    finally:
+        if SERVER_TASK:
+            SERVER_TASK.cancel()
+        await asyncio.sleep(0.2)
 
 if __name__=="__main__":
     try: asyncio.run(main())

@@ -1,0 +1,52 @@
+2025-10-15 09:49:43,579 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-15 09:49:43,579 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-15 09:49:43,580 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-15 09:49:43,580 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-15 09:49:43,580 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-15 09:49:43,580 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-15 09:49:43,580 ERROR socket.accept() out of system resource
+socket: <asyncio.TransportSocket fd=7, family=2, type=1, proto=6, laddr=('127.0.0.1', 4444)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/selector_events.py", line 178, in _accept_connection
+  File "/usr/lib/python3.12/socket.py", line 295, in accept
+OSError: [Errno 24] Too many open files
+2025-10-21 15:37:50,059 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 16:53:24,303 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 16:53:33,886 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 16:54:00,190 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 16:54:25,049 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 16:54:53,456 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 17:00:40,850 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 17:05:32,153 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 17:12:44,592 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
+2025-10-21 17:18:24,657 INFO 🔐 Conexión entrante desde 127.0.0.1 — TLS=TLSv1.3, Cipher=TLS_AES_256_GCM_SHA384
