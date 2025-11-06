@@ -1,0 +1,198 @@
+
+[ Lynis 3.1.5 ]
+
+################################################################################
+  Lynis comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+  welcome to redistribute it under the terms of the GNU General Public License.
+  See the LICENSE file for details about using this software.
+
+  2007-2025, CISOfy - https://cisofy.com/lynis/
+  Enterprise support available (compliance, plugins, interface and tools)
+################################################################################
+
+
+[+] Initializing program
+------------------------------------
+[2C- Detecting OS... [41C [ DONE ]
+[2C- Checking profiles...[37C [ DONE ]
+[2C- Detecting language and localization[22C [ es ]
+
+  ---------------------------------------------------
+  Program version:           3.1.5
+  Operating system:          Linux
+  Operating system name:     Fedora Linux
+  Operating system version:  42
+  Kernel version:            6.17.4
+  Hardware platform:         x86_64
+  Hostname:                  fedora
+  ---------------------------------------------------
+  Profiles:                  /etc/lynis/default.prf
+  Log file:                  /var/log/lynis.log
+  Report file:               /var/log/lynis-report.dat
+  Report version:            1.0
+  Plugin directory:          /usr/share/lynis/plugins
+  ---------------------------------------------------
+  Auditor:                   [Not Specified]
+  Language:                  es
+  Test category:             all
+  Test group:                all
+  ---------------------------------------------------
+[2C- Program update status... [32C [ ACTUALIZACIÓN DISPONIBLE ]
+
+      ===============================================================================
+        Lynis Actualización disponible
+      ===============================================================================
+
+        Current version : 315   Latest version : 316
+
+        Please update to the latest version.
+        New releases include additional features, bug fixes, tests, and baselines.
+
+        Download the latest version:
+
+        Packages (DEB/RPM) -  https://packages.cisofy.com
+        Website (TAR)      -  https://cisofy.com/downloads/
+        GitHub (source)    -  https://github.com/CISOfy/lynis
+
+      ===============================================================================
+
+
+[+] Herramientas del sistema
+------------------------------------
+[2C- Scanning available tools...[30C
+[2C- Checking system binaries...[30C
+
+[+] Plugins (fase 1)
+------------------------------------
+[0CNota: los plugins contienen pruebas más extensivas y toman más tiempo[0C
+[0C [0C
+[2C- Plugins activados[40C [ NINGUNO ]
+
+[+] Arranque y servicios
+------------------------------------
+[2C- Service Manager[42C [ systemd ]
+[2C- Checking UEFI boot[39C [ HABILITADO ]
+[2C- Checking Secure Boot[37C [ DESHABILITADO ]
+[2C- Checking presence GRUB2[34C [ ENCONTRADO ]
+[4C- Checking for password protection[23C [ OK ]
+[2C- Check running services (systemctl)[23C [ HECHO ]
+[8CResult: found 54 running services[20C
+[2C- Check enabled services at boot (systemctl)[15C [ HECHO ]
+[8CResult: found 65 enabled services[20C
+[2C- Check startup files (permissions)[24C [ OK ]
+[2C- Running 'systemd-analyze security'[23C
+[6CUnit name (exposure value) and predicate[15C
+[6C--------------------------------[23C
+[4C- ModemManager.service (value=6.3)[23C [ MEDIO ]
+[4C- NetworkManager.service (value=7.8)[21C [ EXPUESTO ]
+[4C- abrt-journal-core.service (value=9.6)[18C [ INSEGURO ]
+[4C- abrt-oops.service (value=9.6)[26C [ INSEGURO ]
+[4C- abrt-xorg.service (value=9.6)[26C [ INSEGURO ]
+[4C- abrtd.service (value=5.6)[30C [ MEDIO ]
+[4C- accounts-daemon.service (value=5.5)[20C [ MEDIO ]
+[4C- alsa-state.service (value=9.6)[25C [ INSEGURO ]
+[4C- atd.service (value=9.6)[32C [ INSEGURO ]
+[4C- auditd.service (value=9.4)[29C [ INSEGURO ]
+[4C- avahi-daemon.service (value=9.6)[23C [ INSEGURO ]
+[4C- bluetooth.service (value=6.0)[26C [ MEDIO ]
+[4C- chronyd.service (value=3.9)[28C [ PROTEGIDO ]
+[4C- colord.service (value=2.8)[29C [ PROTEGIDO ]
+[4C- crond.service (value=9.6)[30C [ INSEGURO ]
+[4C- cups.service (value=9.6)[31C [ INSEGURO ]
+[4C- dbus-:1.3-org.freedesktop.problems@0.service (value=9.6)[0C [ INSEGURO ]
+[4C- dbus-broker.service (value=8.7)[24C [ EXPUESTO ]
+[4C- dm-event.service (value=9.5)[27C [ INSEGURO ]
+[4C- emergency.service (value=9.5)[26C [ INSEGURO ]
+[4C- firewalld.service (value=7.3)[26C [ MEDIO ]
+[4C- flatpak-system-helper.service (value=9.6)[14C [ INSEGURO ]
+[4C- fprintd.service (value=5.2)[28C [ MEDIO ]
+[4C- fwupd.service (value=4.5)[30C [ PROTEGIDO ]
+[4C- gdm.service (value=9.8)[32C [ INSEGURO ]
+[4C- geoclue.service (value=7.5)[28C [ EXPUESTO ]
+[4C- getty@tty1.service (value=9.6)[25C [ INSEGURO ]
+[4C- grub2-systemd-integration.service (value=9.5)[10C [ INSEGURO ]
+[4C- gssproxy.service (value=8.4)[27C [ EXPUESTO ]
+[4C- irqbalance.service (value=1.4)[25C [ PROTEGIDO ]
+[4C- iscsid.service (value=9.5)[29C [ INSEGURO ]
+[4C- iscsiuio.service (value=9.5)[27C [ INSEGURO ]
+[4C- libvirtd.service (value=9.6)[27C [ INSEGURO ]
+[4C- low-memory-monitor.service (value=6.3)[17C [ MEDIO ]
+[4C- lvm2-lvmpolld.service (value=9.5)[22C [ INSEGURO ]
+[4C- mcelog.service (value=9.6)[29C [ INSEGURO ]
+[4C- mdmonitor.service (value=9.6)[26C [ INSEGURO ]
+[4C- nfs-idmapd.service (value=9.5)[25C [ INSEGURO ]
+[4C- nfs-mountd.service (value=9.5)[25C [ INSEGURO ]
+[4C- nfsdcld.service (value=9.5)[28C [ INSEGURO ]
+[4C- nvidia-persistenced.service (value=9.6)[16C [ INSEGURO ]
+[4C- nvidia-powerd.service (value=9.6)[22C [ INSEGURO ]
+[4C- packagekit.service (value=9.6)[25C [ INSEGURO ]
+[4C- pcscd.service (value=9.6)[30C [ INSEGURO ]
+[4C- plymouth-halt.service (value=9.5)[22C [ INSEGURO ]
+[4C- plymouth-kexec.service (value=9.5)[21C [ INSEGURO ]
+[4C- plymouth-poweroff.service (value=9.5)[18C [ INSEGURO ]
+[4C- plymouth-reboot.service (value=9.5)[20C [ INSEGURO ]
+[4C- plymouth-start.service (value=9.5)[21C [ INSEGURO ]
+[4C- polkit.service (value=1.2)[29C [ PROTEGIDO ]
+[4C- rc-local.service (value=9.6)[27C [ INSEGURO ]
+[4C- rescue.service (value=9.5)[29C [ INSEGURO ]
+[4C- rpc-gssd.service (value=9.5)[27C [ INSEGURO ]
+[4C- rpc-statd-notify.service (value=9.5)[19C [ INSEGURO ]
+[4C- rpc-statd.service (value=9.5)[26C [ INSEGURO ]
+[4C- rpcbind.service (value=7.3)[28C [ MEDIO ]
+[4C- rsyslog.service (value=5.8)[28C [ MEDIO ]
+[4C- rtkit-daemon.service (value=7.1)[23C [ MEDIO ]
+[4C- smartd.service (value=9.6)[29C [ INSEGURO ]
+[4C- sssd-kcm.service (value=7.1)[27C [ MEDIO ]
+[4C- sssd.service (value=7.1)[31C [ MEDIO ]
+[4C- switcheroo-control.service (value=7.6)[17C [ EXPUESTO ]
+[4C- systemd-ask-password-console.service (value=9.4)[7C [ INSEGURO ]
+[4C- systemd-ask-password-plymouth.service (value=9.5)[6C [ INSEGURO ]
+[4C- systemd-ask-password-wall.service (value=9.4)[10C [ INSEGURO ]
+[4C- systemd-bsod.service (value=9.5)[23C [ INSEGURO ]
+[4C- systemd-homed.service (value=5.8)[22C [ MEDIO ]
+[4C- systemd-hostnamed.service (value=1.7)[18C [ PROTEGIDO ]
+[4C- systemd-importd.service (value=5.0)[20C [ MEDIO ]
+[4C- systemd-initctl.service (value=9.4)[20C [ INSEGURO ]
+[4C- systemd-journald.service (value=4.9)[19C [ PROTEGIDO ]
+[4C- systemd-logind.service (value=2.8)[21C [ PROTEGIDO ]
+[4C- systemd-machined.service (value=6.2)[19C [ MEDIO ]
+[4C- systemd-oomd.service (value=1.8)[23C [ PROTEGIDO ]
+[4C- systemd-resolved.service (value=2.2)[19C [ PROTEGIDO ]
+[4C- systemd-rfkill.service (value=9.4)[21C [ INSEGURO ]
+[4C- systemd-timesyncd.service (value=2.1)[18C [ PROTEGIDO ]
+[4C- systemd-udevd.service (value=7.0)[22C [ MEDIO ]
+[4C- systemd-userdbd.service (value=2.3)[20C [ PROTEGIDO ]
+[4C- thermald.service (value=9.6)[27C [ INSEGURO ]
+[4C- tuned-ppd.service (value=9.6)[26C [ INSEGURO ]
+[4C- tuned.service (value=9.6)[30C [ INSEGURO ]
+[4C- udisks2.service (value=9.6)[28C [ INSEGURO ]
+[4C- upower.service (value=2.4)[29C [ PROTEGIDO ]
+[4C- uresourced.service (value=8.5)[25C [ EXPUESTO ]
+[4C- user@0.service (value=9.8)[29C [ INSEGURO ]
+[4C- user@1000.service (value=9.4)[26C [ INSEGURO ]
+[4C- vboxservice.service (value=9.6)[24C [ INSEGURO ]
+[4C- vgauthd.service (value=9.6)[28C [ INSEGURO ]
+[4C- virtinterfaced.service (value=9.6)[21C [ INSEGURO ]
+[4C- virtlockd.service (value=9.6)[26C [ INSEGURO ]
+[4C- virtlogd.service (value=2.2)[27C [ PROTEGIDO ]
+[4C- virtnetworkd.service (value=9.6)[23C [ INSEGURO ]
+[4C- virtnodedevd.service (value=9.6)[23C [ INSEGURO ]
+[4C- virtnwfilterd.service (value=9.6)[22C [ INSEGURO ]
+[4C- virtproxyd.service (value=9.6)[25C [ INSEGURO ]
+[4C- virtqemud.service (value=9.6)[26C [ INSEGURO ]
+[4C- virtsecretd.service (value=9.6)[24C [ INSEGURO ]
+[4C- virtstoraged.service (value=9.6)[23C [ INSEGURO ]
+[4C- vmtoolsd.service (value=9.6)[27C [ INSEGURO ]
+[4C- wpa_supplicant.service (value=9.6)[21C [ INSEGURO ]
+
+[+] Kernel
+------------------------------------
+[2C- Checking default runlevel[32C [ runlevel 5 ]
+[2C- Checking CPU support (NX/PAE)[28C
+[4CCPU support: PAE and/or NoeXecute supported[14C [ ENCONTRADO ]
+[2C- Checking kernel version and release[22C [ HECHO ]
+[2C- Checking kernel type[37C [ HECHO ]
+[2C- Checking loaded kernel modules[27C [ HECHO ]
+
+Interrupt detected.
+[0CCleaning up...[0C [ DONE ]
