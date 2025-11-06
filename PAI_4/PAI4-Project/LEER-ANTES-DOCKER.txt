@@ -1,0 +1,145 @@
+# 🔧 Solución de Problemas - Docker
+
+## ❌ Error: "Cannot connect to the Docker daemon"
+
+Este error significa que Docker está instalado pero el daemon no está corriendo.
+
+### ✅ Solución para Fedora/Linux
+
+```bash
+# 1. Iniciar el servicio de Docker
+sudo systemctl start docker
+
+# 2. Habilitar Docker para que inicie automáticamente al arrancar
+sudo systemctl enable docker
+
+# 3. Verificar el estado
+sudo systemctl status docker
+
+# 4. Agregar tu usuario al grupo docker (opcional, evita usar sudo)
+sudo usermod -aG docker $USER
+
+# 5. Cerrar sesión y volver a entrar para aplicar cambios de grupo
+# O ejecutar:
+newgrp docker
+
+# 6. Verificar que funciona
+docker info
+```
+
+### ✅ Solución para Ubuntu/Debian
+
+```bash
+# 1. Iniciar Docker
+sudo systemctl start docker
+
+# 2. Verificar
+docker info
+
+# Si no funciona, reiniciar el servicio:
+sudo systemctl restart docker
+```
+
+### ✅ Solución para macOS
+
+1. Abrir **Docker Desktop** desde Applications
+2. Esperar a que el icono de la ballena aparezca en la barra superior
+3. Verificar en terminal:
+   ```bash
+   docker info
+   ```
+
+### ✅ Solución para Windows (WSL2)
+
+```powershell
+# En PowerShell como Administrador:
+Start-Service docker
+
+# O abrir Docker Desktop desde el menú inicio
+```
+
+---
+
+## 🚀 Ejecutar los Scripts Después de Iniciar Docker
+
+Una vez que Docker esté corriendo:
+
+```bash
+cd scripts
+
+# Instalar OpenVAS
+./install-openvas.sh
+
+# Instalar Suricata
+./install-suricata.sh
+```
+
+Los scripts ahora detectan automáticamente si Docker no está corriendo y ofrecen iniciarlo.
+
+---
+
+## ⚠️ Permisos en Linux
+
+Si aparece "Permission denied" al ejecutar comandos Docker:
+
+```bash
+# Agregar usuario al grupo docker
+sudo usermod -aG docker $USER
+
+# Aplicar cambios (cerrar sesión y volver a entrar, o ejecutar):
+newgrp docker
+
+# Verificar
+docker ps
+```
+
+---
+
+## 🔍 Verificar Instalación Correcta
+
+```bash
+# Ver versión
+docker --version
+
+# Ver información del sistema
+docker info
+
+# Ver contenedores corriendo
+docker ps
+
+# Ver todas las imágenes
+docker images
+```
+
+---
+
+## 📞 Comandos Útiles
+
+```bash
+# Ver logs de un contenedor
+docker logs <nombre_contenedor>
+
+# Detener un contenedor
+docker stop <nombre_contenedor>
+
+# Reiniciar un contenedor
+docker restart <nombre_contenedor>
+
+# Eliminar un contenedor
+docker rm <nombre_contenedor>
+
+# Ver uso de recursos
+docker stats
+```
+
+---
+
+## ✅ Scripts Actualizados
+
+Los scripts ahora incluyen:
+- ✅ Detección automática del estado de Docker
+- ✅ Opción para iniciar Docker automáticamente
+- ✅ Mensajes de error más claros
+- ✅ Instrucciones específicas por sistema operativo
+
+Simplemente ejecuta los scripts y sigue las instrucciones en pantalla.

@@ -1,0 +1,402 @@
+# Configuración Suricata para PAI-4
+# Este archivo debe copiarse a /etc/suricata/suricata.yaml
+
+# ========================================================================
+# VARIABLES DE RED
+# ========================================================================
+vars:
+  address-groups:
+    HOME_NET: "[192.168.1.0/24]"
+    EXTERNAL_NET: "!$HOME_NET"
+    
+    HTTP_SERVERS: "$HOME_NET"
+    SMTP_SERVERS: "$HOME_NET"
+    SQL_SERVERS: "$HOME_NET"
+    DNS_SERVERS: "$HOME_NET"
+    TELNET_SERVERS: "$HOME_NET"
+    AIM_SERVERS: "$EXTERNAL_NET"
+    DC_SERVERS: "$HOME_NET"
+    DNP3_SERVER: "$HOME_NET"
+    DNP3_CLIENT: "$HOME_NET"
+    MODBUS_CLIENT: "$HOME_NET"
+    MODBUS_SERVER: "$HOME_NET"
+    ENIP_CLIENT: "$HOME_NET"
+    ENIP_SERVER: "$HOME_NET"
+    
+  port-groups:
+    HTTP_PORTS: "[8083,8443]"
+    SHELLCODE_PORTS: "!80"
+    ORACLE_PORTS: "1521"
+    SSH_PORTS: "2288"
+    DNP3_PORTS: "20000"
+    MODBUS_PORTS: "502"
+    FILE_DATA_PORTS: "[$HTTP_PORTS,110,143]"
+    FTP_PORTS: "21"
+    VXLAN_PORTS: "4789"
+    TEREDO_PORTS: "3544"
+    MYSQL_PORTS: "3336"
+
+# ========================================================================
+# CONFIGURACIÓN DE CAPTURA
+# ========================================================================
+default-rule-path: /var/lib/suricata/rules
+
+rule-files:
+  - custom-rules.rules
+  - suricata.rules
+
+# ========================================================================
+# CONFIGURACIÓN DE OUTPUTS
+# ========================================================================
+outputs:
+  # Fast log - Alertas en formato resumido
+  - fast:
+      enabled: yes
+      filename: fast.log
+      append: yes
+
+  # EVE log - Alertas en formato JSON
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      types:
+        - alert:
+            payload: yes
+            payload-buffer-size: 4kb
+            payload-printable: yes
+            packet: yes
+            metadata: yes
+            http-body: yes
+            http-body-printable: yes
+            tagged-packets: yes
+        - anomaly:
+            enabled: yes
+            types:
+        - http:
+            extended: yes
+        - dns:
+            query: yes
+            answer: yes
+        - tls:
+            extended: yes
+        - files:
+            force-magic: no
+            force-hash: [md5]
+        - smtp:
+            extended: yes
+        - ssh
+        - stats:
+            totals: yes
+            threads: no
+            deltas: no
+        - flow
+
+  # Unified2 output (compatible con Barnyard2)
+  - unified2-alert:
+      enabled: no
+      filename: unified2.alert
+
+  # Stats log
+  - stats:
+      enabled: yes
+      filename: stats.log
+      append: yes
+      totals: yes
+      threads: no
+
+# ========================================================================
+# CONFIGURACIÓN DE LOGGING
+# ========================================================================
+logging:
+  default-log-level: notice
+  default-output-filter:
+  
+  outputs:
+  - console:
+      enabled: yes
+  - file:
+      enabled: yes
+      level: info
+      filename: suricata.log
+  - syslog:
+      enabled: no
+      facility: local5
+      format: "[%i] <%d> -- "
+
+# ========================================================================
+# CONFIGURACIÓN DE AF_PACKET
+# ========================================================================
+af-packet:
+  - interface: eth0
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    tpacket-v3: yes
+
+# ========================================================================
+# CONFIGURACIÓN DE DETECCIÓN
+# ========================================================================
+detect:
+  profile: medium
+  custom-values:
+    toclient-groups: 3
+    toserver-groups: 25
+  sgh-mpm-context: auto
+  inspection-recursion-limit: 3000
+
+# ========================================================================
+# CONFIGURACIÓN DE APP LAYER
+# ========================================================================
+app-layer:
+  protocols:
+    tls:
+      enabled: yes
+      detection-ports:
+        dp: 8443
+    http:
+      enabled: yes
+    ssh:
+      enabled: yes
+    smtp:
+      enabled: yes
+    ftp:
+      enabled: yes
+    dns:
+      tcp:
+        enabled: yes
+      udp:
+        enabled: yes
+    mysql:
+      enabled: yes
+
+# ========================================================================
+# CONFIGURACIÓN DE PERFORMANCE
+# ========================================================================
+threading:
+  set-cpu-affinity: no
+  cpu-affinity:
+    - management-cpu-set:
+        cpu: [ 0 ]
+    - receive-cpu-set:
+        cpu: [ 0 ]
+    - worker-cpu-set:
+        cpu: [ "all" ]
+  detect-thread-ratio: 1.0
+
+# ========================================================================
+# CONFIGURACIÓN DE PCAP
+# ========================================================================
+pcap:
+  - interface: eth0
+    buffer-size: 32768
+    checksum-checks: auto
+
+# ========================================================================
+# CONFIGURACIÓN DE HOST OS
+# ========================================================================
+host-os-policy:
+  linux: [0.0.0.0/0]
+  windows: []
+  bsd: []
+  bsd-right: []
+  old-linux: []
+  old-solaris: []
+  hpux10: []
+  hpux11: []
+  irix: []
+  macos: []
+  vista: []
+  windows2k3: []
+
+# ========================================================================
+# CONFIGURACIÓN DE STREAM
+# ========================================================================
+stream:
+  memcap: 64mb
+  checksum-validation: yes
+  inline: auto
+  reassembly:
+    memcap: 256mb
+    depth: 1mb
+    toserver-chunk-size: 2560
+    toclient-chunk-size: 2560
+    randomize-chunk-size: yes
+
+# ========================================================================
+# CONFIGURACIÓN DE HOST
+# ========================================================================
+host:
+  hash-size: 4096
+  prealloc: 1000
+  memcap: 32mb
+
+# ========================================================================
+# CONFIGURACIÓN DE DECODER
+# ========================================================================
+decoder:
+  teredo:
+    enabled: true
+    ports: $TEREDO_PORTS
+  vxlan:
+    enabled: true
+    ports: $VXLAN_PORTS
+
+# ========================================================================
+# CONFIGURACIÓN DE DEFRAG
+# ========================================================================
+defrag:
+  memcap: 32mb
+  hash-size: 65536
+  trackers: 65535
+  max-frags: 65535
+  prealloc: yes
+  timeout: 60
+
+# ========================================================================
+# CONFIGURACIÓN DE FLOW
+# ========================================================================
+flow:
+  memcap: 128mb
+  hash-size: 65536
+  prealloc: 10000
+  emergency-recovery: 30
+  prune-flows: 5
+
+# ========================================================================
+# CONFIGURACIÓN DE ASYNCHRONOUS
+# ========================================================================
+asn1-max-frames: 256
+
+# ========================================================================
+# CONFIGURACIÓN DE PROFILING
+# ========================================================================
+profiling:
+  rules:
+    enabled: yes
+    filename: rule_perf.log
+    append: yes
+  keywords:
+    enabled: yes
+    filename: keyword_perf.log
+    append: yes
+  prefilter:
+    enabled: yes
+    filename: prefilter_perf.log
+    append: yes
+  rulegroups:
+    enabled: yes
+    filename: rule_group_perf.log
+    append: yes
+  packets:
+    enabled: yes
+    filename: packet_stats.log
+    append: yes
+  locks:
+    enabled: no
+    filename: lock_stats.log
+    append: yes
+  pcap-log:
+    enabled: no
+    filename: pcaplog_stats.log
+    append: yes
+
+# ========================================================================
+# CONFIGURACIÓN DE NFQUEUE
+# ========================================================================
+nfq:
+  mode: accept
+  repeat-mark: 1
+  repeat-mask: 1
+  bypass-mark: 1
+  bypass-mask: 1
+  route-queue: 2
+  batchcount: 20
+  fail-open: yes
+
+# ========================================================================
+# CONFIGURACIÓN DE CAPTURE
+# ========================================================================
+capture:
+
+# ========================================================================
+# CONFIGURACIÓN DE NETMAP
+# ========================================================================
+netmap:
+  - interface: eth0
+    threads: auto
+    copy-mode: ips
+    copy-iface: eth1
+
+# ========================================================================
+# CONFIGURACIÓN DE PF_RING
+# ========================================================================
+pfring:
+  - interface: eth0
+    threads: auto
+    cluster-id: 99
+    cluster-type: cluster_flow
+
+# ========================================================================
+# CONFIGURACIÓN DE IPFW
+# ========================================================================
+ipfw:
+
+# ========================================================================
+# CONFIGURACIÓN DE NAPATECH
+# ========================================================================
+napatech:
+    streams: ["0-3"]
+    enable-stream-stats: no
+    auto-config: yes
+    hardware-bypass: yes
+
+# ========================================================================
+# CONFIGURACIÓN DE MPIPE
+# ========================================================================
+mpipe:
+  load-balance:
+    streams: 1
+
+# ========================================================================
+# CONFIGURACIÓN DE ERF
+# ========================================================================
+erf-file:
+  - interface: eth0
+    file: /var/log/suricata/capture.erf
+
+# ========================================================================
+# CONFIGURACIÓN DE NETFILTER
+# ========================================================================
+legacy:
+  uricontent: enabled
+
+# ========================================================================
+# ENGINE ANALYSIS
+# ========================================================================
+engine-analysis:
+  rules-fast-pattern: yes
+  rules: yes
+
+# ========================================================================
+# PCAP PROCESSING
+# ========================================================================
+pcap-file:
+  checksum-checks: auto
+
+# ========================================================================
+# UNIX SOCKET
+# ========================================================================
+unix-command:
+  enabled: yes
+  filename: /var/run/suricata/suricata-command.socket
+
+# ========================================================================
+# ACTION ORDER
+# ========================================================================
+action-order:
+  - pass
+  - drop
+  - reject
+  - alert

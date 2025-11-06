@@ -1,0 +1,39 @@
+11/15/2025-14:23:45.123456 [**] [1:1000001:1] ALERTA: Acceso HTTP desde red externa al puerto 8083 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 203.0.113.25:55555 -> 192.168.1.10:8083
+
+11/15/2025-14:23:47.234567 [**] [1:1000001:1] ALERTA: Acceso HTTP desde red externa al puerto 8083 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 203.0.113.25:55556 -> 192.168.1.10:8083
+
+11/15/2025-14:25:12.789012 [**] [1:1000003:1] ATAQUE: Posible SQL Injection detectada [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 203.0.113.25:56789 -> 192.168.1.10:8083
+
+11/15/2025-14:26:33.456789 [**] [1:1000004:1] ATAQUE: Intento de XSS detectado [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 203.0.113.25:57890 -> 192.168.1.10:8083
+
+11/15/2025-14:28:01.111111 [**] [1:1000005:1] ALERTA CRITICA: Acceso MySQL desde red externa [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 203.0.113.25:12345 -> 192.168.1.11:3336
+
+11/15/2025-14:28:03.222222 [**] [1:1000005:1] ALERTA CRITICA: Acceso MySQL desde red externa [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 203.0.113.25:12346 -> 192.168.1.11:3336
+
+11/15/2025-14:28:05.333333 [**] [1:1000006:1] ATAQUE: Posible fuerza bruta MySQL detectada [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 203.0.113.25:12347 -> 192.168.1.11:3336
+
+11/15/2025-14:30:15.444444 [**] [1:1000007:1] ALERTA: Acceso SSH desde red externa al puerto 2288 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.220.101.45:23456 -> 192.168.1.12:2288
+
+11/15/2025-14:30:18.555555 [**] [1:1000007:1] ALERTA: Acceso SSH desde red externa al puerto 2288 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.220.101.45:23457 -> 192.168.1.12:2288
+
+11/15/2025-14:30:25.666666 [**] [1:1000008:1] ATAQUE: Intento de fuerza bruta SSH detectado [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 185.220.101.45:23460 -> 192.168.1.12:2288
+
+11/15/2025-14:32:10.777777 [**] [1:1000002:1] ALERTA: Acceso HTTPS desde red externa al puerto 8443 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 45.142.215.98:34567 -> 192.168.1.10:8443
+
+11/15/2025-14:35:20.567890 [**] [1:1000010:1] RECONOCIMIENTO: Escaneo Nmap SYN detectado [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 91.203.5.32:45678 -> 192.168.1.10:8083
+
+11/15/2025-14:35:20.678901 [**] [1:1000010:1] RECONOCIMIENTO: Escaneo Nmap SYN detectado [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 91.203.5.32:45679 -> 192.168.1.10:8443
+
+11/15/2025-14:35:20.789012 [**] [1:1000010:1] RECONOCIMIENTO: Escaneo Nmap SYN detectado [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 91.203.5.32:45680 -> 192.168.1.11:3336
+
+11/15/2025-14:35:20.890123 [**] [1:1000010:1] RECONOCIMIENTO: Escaneo Nmap SYN detectado [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 91.203.5.32:45681 -> 192.168.1.12:2288
+
+11/15/2025-14:40:55.111222 [**] [1:1000003:1] ATAQUE: Posible SQL Injection detectada [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 198.51.100.23:55555 -> 192.168.1.10:8083
+
+11/15/2025-14:42:33.333444 [**] [1:1000011:1] ATAQUE: Posible ICMP Flood detectado [**] [Classification: Attempted Denial of Service] [Priority: 2] {ICMP} 203.0.113.77:0 -> 192.168.1.10:0
+
+11/15/2025-14:45:10.555666 [**] [1:1000001:1] ALERTA: Acceso HTTP desde red externa al puerto 8083 [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 185.220.101.45:66666 -> 192.168.1.10:8083
+
+11/15/2025-14:47:22.777888 [**] [1:1000003:1] ATAQUE: Posible SQL Injection detectada [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 45.142.215.98:77777 -> 192.168.1.10:8083
+
+11/15/2025-14:50:45.999000 [**] [1:1000004:1] ATAQUE: Intento de XSS detectado [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 91.203.5.32:88888 -> 192.168.1.10:8443

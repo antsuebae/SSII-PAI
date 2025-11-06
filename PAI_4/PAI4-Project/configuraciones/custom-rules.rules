@@ -1,0 +1,124 @@
+# ========================================================================
+# REGLAS PERSONALIZADAS SURICATA - PAI-4
+# ========================================================================
+# Objetivo: Detectar tráfico sospechoso hacia servicios internos
+# Servicios protegidos:
+#   - HTTP/HTTPS: puertos 8083, 8443
+#   - MySQL: puerto 3336
+#   - SSH/SFTP: puerto 2288
+# ========================================================================
+
+# ========================================================================
+# PROTECCIÓN DE SERVICIOS HTTP/HTTPS
+# ========================================================================
+
+# Regla 1: Detectar acceso HTTP no autorizado desde red externa
+alert tcp $EXTERNAL_NET any -> $HOME_NET 8083 \
+  (msg:"ALERTA: Acceso HTTP desde red externa al puerto 8083"; \
+  flow:to_server,established; \
+  classtype:policy-violation; \
+  sid:1000001; rev:1;)
+
+# Regla 2: Detectar acceso HTTPS no autorizado desde red externa
+alert tcp $EXTERNAL_NET any -> $HOME_NET 8443 \
+  (msg:"ALERTA: Acceso HTTPS desde red externa al puerto 8443"; \
+  flow:to_server,established; \
+  classtype:policy-violation; \
+  sid:1000002; rev:1;)
+
+# Regla 3: Detectar intentos de SQL Injection
+alert http $EXTERNAL_NET any -> $HOME_NET [8083,8443] \
+  (msg:"ATAQUE: Posible SQL Injection detectada"; \
+  flow:to_server,established; \
+  content:"SELECT"; nocase; http_uri; \
+  content:"FROM"; nocase; distance:0; http_uri; \
+  classtype:web-application-attack; \
+  sid:1000003; rev:1;)
+
+# Regla 4: Detectar intentos de Cross-Site Scripting (XSS)
+alert http $EXTERNAL_NET any -> $HOME_NET [8083,8443] \
+  (msg:"ATAQUE: Intento de XSS detectado"; \
+  flow:to_server,established; \
+  content:"<script"; nocase; http_uri; \
+  classtype:web-application-attack; \
+  sid:1000004; rev:1;)
+
+# ========================================================================
+# PROTECCIÓN DE MYSQL
+# ========================================================================
+
+# Regla 5: Detectar acceso MySQL no autorizado desde red externa
+alert tcp $EXTERNAL_NET any -> $HOME_NET 3336 \
+  (msg:"ALERTA CRITICA: Acceso MySQL desde red externa"; \
+  flow:to_server,established; \
+  classtype:policy-violation; \
+  sid:1000005; rev:1;)
+
+# Regla 6: Detectar intentos de fuerza bruta MySQL
+# Se activa tras 5 conexiones desde la misma IP en 60 segundos
+alert tcp $EXTERNAL_NET any -> $HOME_NET 3336 \
+  (msg:"ATAQUE: Posible fuerza bruta MySQL detectada"; \
+  flow:to_server,established; \
+  threshold:type threshold, track by_src, count 5, seconds 60; \
+  classtype:attempted-admin; \
+  sid:1000006; rev:1;)
+
+# ========================================================================
+# PROTECCIÓN DE SSH/SFTP
+# ========================================================================
+
+# Regla 7: Detectar acceso SSH no autorizado desde red externa
+alert tcp $EXTERNAL_NET any -> $HOME_NET 2288 \
+  (msg:"ALERTA: Acceso SSH desde red externa al puerto 2288"; \
+  flow:to_server,established; \
+  classtype:policy-violation; \
+  sid:1000007; rev:1;)
+
+# Regla 8: Detectar intentos de fuerza bruta SSH
+# Se activa tras 5 conexiones desde la misma IP en 120 segundos
+alert tcp $EXTERNAL_NET any -> $HOME_NET 2288 \
+  (msg:"ATAQUE: Intento de fuerza bruta SSH detectado"; \
+  flow:to_server,established; \
+  threshold:type threshold, track by_src, count 5, seconds 120; \
+  classtype:attempted-admin; \
+  sid:1000008; rev:1;)
+
+# Regla 9: Detectar escaneo de puerto SSH
+alert tcp $EXTERNAL_NET any -> $HOME_NET 2288 \
+  (msg:"RECONOCIMIENTO: Escaneo de puerto SSH detectado"; \
+  flags:S; \
+  threshold:type threshold, track by_src, count 3, seconds 10; \
+  classtype:attempted-recon; \
+  sid:1000009; rev:1;)
+
+# ========================================================================
+# DETECCIÓN GENERAL DE ATAQUES
+# ========================================================================
+
+# Regla 10: Detectar escaneo Nmap SYN en servicios protegidos
+alert tcp $EXTERNAL_NET any -> $HOME_NET [8083,8443,3336,2288] \
+  (msg:"RECONOCIMIENTO: Escaneo Nmap SYN detectado"; \
+  flags:S; \
+  threshold:type threshold, track by_src, count 10, seconds 10; \
+  classtype:attempted-recon; \
+  sid:1000010; rev:1;)
+
+# Regla 11: Detectar ICMP Flood (posible DoS)
+alert icmp $EXTERNAL_NET any -> $HOME_NET any \
+  (msg:"ATAQUE: Posible ICMP Flood detectado"; \
+  itype:8; icode:0; \
+  threshold:type threshold, track by_src, count 50, seconds 10; \
+  classtype:attempted-dos; \
+  sid:1000011; rev:1;)
+
+# Regla 12: Detectar Path Traversal en peticiones HTTP
+alert http $EXTERNAL_NET any -> $HOME_NET [8083,8443] \
+  (msg:"ATAQUE: Intento de Path Traversal detectado"; \
+  flow:to_server,established; \
+  content:"../"; http_uri; \
+  classtype:web-application-attack; \
+  sid:1000012; rev:1;)
+
+# ========================================================================
+# FIN DE REGLAS PERSONALIZADAS
+# ========================================================================
