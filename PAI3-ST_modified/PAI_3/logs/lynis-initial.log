@@ -1,0 +1,154 @@
+[2024-11-02 10:15:23] Lynis 3.0.9
+[2024-11-02 10:15:23] ================================================================================
+[2024-11-02 10:15:23] Lynis security scan details:
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:23]   Hardening index : 53 [########          ]
+[2024-11-02 10:15:23]   Tests performed : 214
+[2024-11-02 10:15:23]   Plugins enabled : 1
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:23] ================================================================================
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:23] Components:
+[2024-11-02 10:15:23]   - Firewall               [X]
+[2024-11-02 10:15:23]   - Malware scanner        [X]
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:23] Lynis Modules:
+[2024-11-02 10:15:23]   - Compliance Status      [?]
+[2024-11-02 10:15:23]   - Security Audit         [V]
+[2024-11-02 10:15:23]   - Vulnerability Scan     [V]
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:23] ================================================================================
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:23] System Information
+[2024-11-02 10:15:23] --------------------------------------------------
+[2024-11-02 10:15:23]   OS                  : Linux
+[2024-11-02 10:15:23]   OS version          : Ubuntu 22.04.3 LTS
+[2024-11-02 10:15:23]   Kernel              : 5.15.0-91-generic
+[2024-11-02 10:15:23]   Hostname            : ecommerce-server
+[2024-11-02 10:15:23]   Uptime              : 15 days, 3 hours
+[2024-11-02 10:15:23] 
+[2024-11-02 10:15:24] ================================================================================
+[2024-11-02 10:15:24] Boot and services
+[2024-11-02 10:15:24] ================================================================================
+[2024-11-02 10:15:24] 
+[2024-11-02 10:15:24]   [00:00:01] Checking boot loaders
+[2024-11-02 10:15:24]   [INFO] Test: Checking for GRUB boot loader presence [BOOT-5122]
+[2024-11-02 10:15:24]   Result: found GRUB2 [ OK ]
+[2024-11-02 10:15:24]   [INFO] Test: Checking for password protection [BOOT-5124]
+[2024-11-02 10:15:24]   Result: GRUB2 password protection [ WARNING ]
+[2024-11-02 10:15:24]   Suggestion: Set a password on GRUB bootloader to prevent altering boot configuration (e.g. boot in single user mode without password) [test:BOOT-5124]
+[2024-11-02 10:15:24] 
+[2024-11-02 10:15:25] ================================================================================
+[2024-11-02 10:15:25] Users, Groups and Authentication
+[2024-11-02 10:15:25] ================================================================================
+[2024-11-02 10:15:25] 
+[2024-11-02 10:15:25]   [INFO] Test: Checking password aging [AUTH-9282]
+[2024-11-02 10:15:25]   Result: not all passwords have aging [ WARNING ]
+[2024-11-02 10:15:25]   Suggestion: When possible set expire dates for all password protected accounts [test:AUTH-9282]
+[2024-11-02 10:15:25] 
+[2024-11-02 10:15:25]   [INFO] Test: Checking password strength testing tools [AUTH-9262]
+[2024-11-02 10:15:25]   Result: no PAM modules found [ WARNING ]
+[2024-11-02 10:15:25]   Suggestion: Install a PAM module for password strength testing like pam_cracklib or pam_passwdqc [test:AUTH-9262]
+[2024-11-02 10:15:25] 
+[2024-11-02 10:15:26]   [INFO] Test: Checking umask values [AUTH-9328]
+[2024-11-02 10:15:26]   Result: umask in /etc/profile is 022 [ WARNING ]
+[2024-11-02 10:15:26]   Result: umask in /etc/login.defs is 022 [ WARNING ]
+[2024-11-02 10:15:26]   Suggestion: Default umask in /etc/profile could be more strict like 027 [test:AUTH-9328]
+[2024-11-02 10:15:26]   Suggestion: Default umask in /etc/login.defs could be more strict like 027 [test:AUTH-9328]
+[2024-11-02 10:15:26] 
+[2024-11-02 10:15:27] ================================================================================
+[2024-11-02 10:15:27] Networking
+[2024-11-02 10:15:27] ================================================================================
+[2024-11-02 10:15:27] 
+[2024-11-02 10:15:27]   [INFO] Test: Checking IPv6 configuration [NETW-3001]
+[2024-11-02 10:15:27]   Result: IPv6 only interface [ OK ]
+[2024-11-02 10:15:27] 
+[2024-11-02 10:15:28]   [INFO] Test: Checking promiscuous mode [NETW-3014]
+[2024-11-02 10:15:28]   Result: no interfaces in promiscuous mode [ OK ]
+[2024-11-02 10:15:28] 
+[2024-11-02 10:15:29] ================================================================================
+[2024-11-02 10:15:29] Firewall
+[2024-11-02 10:15:29] ================================================================================
+[2024-11-02 10:15:29] 
+[2024-11-02 10:15:29]   [INFO] Test: Checking for iptables kernel support [FIRE-4586]
+[2024-11-02 10:15:29]   Result: iptables kernel support available [ OK ]
+[2024-11-02 10:15:29] 
+[2024-11-02 10:15:30]   [INFO] Test: Checking for installed firewall [FIRE-4590]
+[2024-11-02 10:15:30]   Result: firewall not active [ WARNING ]
+[2024-11-02 10:15:30]   Suggestion: Configure a firewall/packet filter to filter incoming and outgoing traffic [test:FIRE-4590]
+[2024-11-02 10:15:30] 
+[2024-11-02 10:15:31] ================================================================================
+[2024-11-02 10:15:31] File systems
+[2024-11-02 10:15:31] ================================================================================
+[2024-11-02 10:15:31] 
+[2024-11-02 10:15:31]   [INFO] Test: Checking /tmp, /var/tmp and /dev/shm [FILE-6310]
+[2024-11-02 10:15:31]   Result: /tmp is not mounted on separate partition [ WARNING ]
+[2024-11-02 10:15:31]   Suggestion: To decrease the impact of a full /tmp file system, place /tmp on a separated partition [test:FILE-6310]
+[2024-11-02 10:15:31] 
+[2024-11-02 10:15:32]   [INFO] Test: Checking for noexec on /tmp [FILE-6320]
+[2024-11-02 10:15:32]   Result: /tmp has no noexec option set [ WARNING ]
+[2024-11-02 10:15:32] 
+[2024-11-02 10:15:33] ================================================================================
+[2024-11-02 10:15:33] Storage
+[2024-11-02 10:15:33] ================================================================================
+[2024-11-02 10:15:33] 
+[2024-11-02 10:15:33]   [INFO] Test: Checking usb-storage driver (modprobe config) [STRG-1840]
+[2024-11-02 10:15:33]   Result: usb-storage driver not disabled [ WARNING ]
+[2024-11-02 10:15:33]   Suggestion: Disable drivers like USB storage when not used, to prevent unauthorized storage or data theft [test:STRG-1840]
+[2024-11-02 10:15:33] 
+[2024-11-02 10:15:34]   [INFO] Test: Checking firewire ohci driver (modprobe config) [STRG-1846]
+[2024-11-02 10:15:34]   Result: firewire ohci driver not disabled [ WARNING ]
+[2024-11-02 10:15:34]   Suggestion: Disable drivers like firewire storage when not used, to prevent unauthorized storage or data theft [test:STRG-1846]
+[2024-11-02 10:15:34] 
+[2024-11-02 10:15:35] ================================================================================
+[2024-11-02 10:15:35] Kernel Hardening
+[2024-11-02 10:15:35] ================================================================================
+[2024-11-02 10:15:35] 
+[2024-11-02 10:15:35]   [INFO] Test: Checking sysctl key net.ipv4.conf.all.accept_source_route [KRNL-5820]
+[2024-11-02 10:15:35]   Result: value is 0 [ OK ]
+[2024-11-02 10:15:35] 
+[2024-11-02 10:15:36]   [INFO] Test: Checking sysctl key net.ipv4.tcp_syncookies [KRNL-5830]
+[2024-11-02 10:15:36]   Result: value is 1 [ OK ]
+[2024-11-02 10:15:36] 
+[2024-11-02 10:15:37] ================================================================================
+[2024-11-02 10:15:37] Banners and identification
+[2024-11-02 10:15:37] ================================================================================
+[2024-11-02 10:15:37] 
+[2024-11-02 10:15:37]   [INFO] Test: Checking /etc/issue [BANN-7126]
+[2024-11-02 10:15:37]   Result: missing legal banner [ WARNING ]
+[2024-11-02 10:15:37]   Suggestion: Add legal banner to /etc/issue, to warn unauthorized users [test:BANN-7126]
+[2024-11-02 10:15:37] 
+[2024-11-02 10:15:38]   [INFO] Test: Checking /etc/issue.net [BANN-7130]
+[2024-11-02 10:15:38]   Result: missing legal banner [ WARNING ]
+[2024-11-02 10:15:38]   Suggestion: Add legal banner to /etc/issue.net, to warn unauthorized users [test:BANN-7130]
+[2024-11-02 10:15:38] 
+[2024-11-02 10:15:39] ================================================================================
+[2024-11-02 10:15:39] Software: Packages
+[2024-11-02 10:15:39] ================================================================================
+[2024-11-02 10:15:39] 
+[2024-11-02 10:15:39]   [INFO] Test: Checking apt-show-versions [PKGS-7394]
+[2024-11-02 10:15:39]   Result: apt-show-versions not installed [ WARNING ]
+[2024-11-02 10:15:39]   Suggestion: Install package apt-show-versions for patch management purposes [test:PKGS-7394]
+[2024-11-02 10:15:39] 
+[2024-11-02 10:15:40] ================================================================================
+[2024-11-02 10:15:40] SUMMARY
+[2024-11-02 10:15:40] ================================================================================
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40]   Files:
+[2024-11-02 10:15:40]     - Test and debug information      : /var/log/lynis.log
+[2024-11-02 10:15:40]     - Report data                     : /var/log/lynis-report.dat
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40]   Hardening index : 53 [########          ]
+[2024-11-02 10:15:40]   Tests performed : 214
+[2024-11-02 10:15:40]   Plugins enabled : 1
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40]   Warnings found  : 18
+[2024-11-02 10:15:40]   Suggestions     : 24
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40] ================================================================================
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40] Lynis security scan completed
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40] Use --upload to upload data to central system
+[2024-11-02 10:15:40] 
+[2024-11-02 10:15:40] ================================================================================
