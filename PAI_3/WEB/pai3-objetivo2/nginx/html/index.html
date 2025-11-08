@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAI-3 VULNAWEB - Entorno de Auditoría</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .app-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+        .app-card:hover { transform: translateY(-5px); }
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .app-card h3 { color: #333; margin-bottom: 10px; font-size: 1.4rem; }
+        .app-card p { color: #666; line-height: 1.6; margin-bottom: 20px; }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #495057;
+            border: 1px solid #dee2e6;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🛡️ PAI-3 VULNAWEB</h1>
+            <p>Entorno de Auditoría de Seguridad Web - Security Team INSEGUS</p>
+        </header>
+
+        <div class="grid">
+            <div class="app-card">
+                <div class="app-icon">🐐</div>
+                <h3>OWASP WebGoat</h3>
+                <p>Aplicación web intencionalmente vulnerable con lecciones interactivas sobre diferentes tipos de vulnerabilidades de seguridad.</p>
+                <a href="http://localhost:8080/WebGoat" class="btn btn-primary" target="_blank">Abrir WebGoat</a>
+                <a href="http://localhost:9001" class="btn btn-secondary" target="_blank">WebWolf</a>
+                <p style="margin-top: 15px;"><span class="status-indicator"></span>Puerto 8080 | OWASP Top 10</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🔍</div>
+                <h3>OWASP Mutillidae II</h3>
+                <p>Aplicación PHP/MySQL vulnerable que incluye SQL Injection, XSS, CSRF, Command Injection y más.</p>
+                <a href="http://localhost:8082" class="btn btn-primary" target="_blank">Abrir Mutillidae</a>
+                <a href="http://localhost:8082/set-up-database.php" class="btn btn-secondary" target="_blank">Setup DB</a>
+                <p style="margin-top: 15px;"><span class="status-indicator"></span>Puerto 8082 | PHP/MySQL</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">⚡</div>
+                <h3>DVWA</h3>
+                <p>Damn Vulnerable Web Application - Entorno con diferentes niveles de seguridad para practicar técnicas de pentesting.</p>
+                <a href="http://localhost:8083" class="btn btn-primary" target="_blank">Abrir DVWA</a>
+                <a href="http://localhost:8083/setup.php" class="btn btn-secondary" target="_blank">Setup</a>
+                <p style="margin-top: 15px;"><span class="status-indicator"></span>Puerto 8083 | Multi-nivel</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🔧</div>
+                <h3>OWASP ZAP</h3>
+                <p>Configura tu navegador para usar ZAP como proxy y realizar intercepción de tráfico HTTP/HTTPS.</p>
+                <a href="#" onclick="showZAPConfig()" class="btn btn-primary">Ver Configuración</a>
+                <p style="margin-top: 15px;"><span class="status-indicator"></span>Puerto 8081 | Proxy Manual</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Security Team INSEGUS - Universidad de Sevilla</p>
+        </footer>
+    </div>
+
+    <script>
+        function showZAPConfig() {
+            alert(`Configuración de OWASP ZAP:
+
+1. Instalar: sudo dnf install zaproxy
+2. Abrir OWASP ZAP
+3. Tools → Options → Local Proxies
+4. Address: localhost, Port: 8081
+5. Configurar Firefox:
+   - Proxy HTTP: 127.0.0.1:8081
+6. Importar certificado ZAP
+
+¡Después intercepta todo el tráfico!`);
+        }
+    </script>
+</body>
+</html>

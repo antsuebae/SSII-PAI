@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # OWASP WebGoat
+  webgoat:
+    image: webgoat/goatandwolf:latest
+    container_name: pai3-webgoat
+    ports:
+      - "8080:8080"
+      - "9001:9001"
+    environment:
+      - WEBGOAT_PORT=8080
+      - WEBWOLF_PORT=9001
+    volumes:
+      - webgoat-data:/home/webgoat/.webgoat
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+  # OWASP Mutillidae II
+  mutillidae:
+    image: citizenstig/nowasp:latest
+    container_name: pai3-mutillidae
+    ports:
+      - "8082:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mutillidae
+      - MYSQL_DATABASE=mutillidae
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+  # DVWA
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: pai3-dvwa
+    ports:
+      - "8083:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=dvwa
+      - MYSQL_DATABASE=dvwa
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+  # Nginx Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: pai3-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/html:/usr/share/nginx/html:ro
+      - ./logs:/var/log/nginx
+    depends_on:
+      - webgoat
+      - mutillidae
+      - dvwa
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+volumes:
+  webgoat-data:
+
+networks:
+  pai3-network:
+    driver: bridge

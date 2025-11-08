@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # OWASP WebGoat - Aplicación vulnerable para auditoría
+  webgoat:
+    image: webgoat/goatandwolf:latest
+    container_name: pai3-webgoat
+    ports:
+      - "8080:8080"
+      - "9001:9001"
+    environment:
+      - WEBGOAT_PORT=8080
+      - WEBWOLF_PORT=9001
+    volumes:
+      - webgoat-data:/home/webgoat/.webgoat
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+  # OWASP Mutillidae II alternativo
+  mutillidae:
+    image: citizenstig/nowasp:latest
+    container_name: pai3-mutillidae
+    ports:
+      - "8081:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mutillidae
+      - MYSQL_DATABASE=mutillidae
+      - MYSQL_USER=mutillidae
+      - MYSQL_PASSWORD=mutillidae
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+  # DVWA (Damn Vulnerable Web Application)
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: pai3-dvwa
+    ports:
+      - "8082:80"
+    environment:
+      - MYSQL_ROOT_PASSWORD=dvwa
+      - MYSQL_DATABASE=dvwa
+      - MYSQL_USER=dvwa
+      - MYSQL_PASSWORD=dvwa
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+  # Nginx como proxy reverso (opcional)
+  nginx:
+    image: nginx:alpine
+    container_name: pai3-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/html:/usr/share/nginx/html:ro
+    depends_on:
+      - webgoat
+      - mutillidae
+      - dvwa
+    restart: unless-stopped
+    networks:
+      - pai3-network
+
+volumes:
+  webgoat-data:
+    driver: local
+
+networks:
+  pai3-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

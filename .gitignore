@@ -1,0 +1,13 @@
+# PAI-3 - Archivos sensibles que NO van a Git
+*.pem
+*.key
+*.crt
+**/ssl/
+logs/
+resultados-*/
+evidencias/
+*.log
+.env
+PAI_3/WEB/pai3-objetivo2/nginx/ssl/
+PAI_3/WEB/pai3-objetivo2/logs/
+PAI_3/WEB/pai3-objetivo2/resultados-*/

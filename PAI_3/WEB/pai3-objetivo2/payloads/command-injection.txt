@@ -1,0 +1,7 @@
+; ls -la
+; cat /etc/passwd
+; whoami
+| whoami
+&& whoami
+`whoami`
+$(whoami)
