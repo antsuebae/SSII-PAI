@@ -5,56 +5,6 @@
 
 ## Contenido del Entregable
 
-Este archivo ZIP contiene todos los elementos solicitados para el proyecto PAI-3 VULNAWEB:
-
-```
-PAI3-VULNAWEB/
-├── INFORME_PAI3.pdf                    # Informe principal (7-8 páginas)
-├── INFORME_PAI3.md                     # Versión Markdown del informe
-├── README.md                           # Este archivo
-├── scripts/
-│   ├── hardening-actions.sh            # Script principal de hardening
-│   ├── browser-hardening.sh            # Configuración segura del navegador
-│   └── verify-hardening.sh             # Script de verificación
-├── logs/
-│   ├── lynis-initial.log               # Auditoría inicial (Hardening: 53)
-│   ├── lynis-final.log                 # Auditoría final (Hardening: 72)
-│   ├── malwarebytes-scan.log           # Escaneo del dispositivo móvil
-│   ├── zap-session.log                 # Log de sesión OWASP ZAP
-│   └── fuzzer-results.log              # Resultados del fuzzing
-├── configs/
-│   ├── firefox/
-│   │   ├── user.js                     # Configuración Firefox hardened
-│   │   └── policies.json               # Políticas empresariales
-│   ├── ufw/
-│   │   └── rules.conf                  # Reglas del firewall
-│   ├── fail2ban/
-│   │   └── jail.local                  # Configuración fail2ban
-│   ├── pam.d/
-│   │   └── common-password             # Políticas de contraseñas
-│   └── sysctl.d/
-│       └── 99-hardening.conf           # Hardening del kernel
-├── zap-reports/
-│   ├── zap-full-report.html            # Reporte completo de ZAP
-│   ├── vulnerabilities-summary.md      # Resumen de vulnerabilidades
-│   └── payloads/
-│       ├── sql-injection-payloads.txt  # Payloads SQL usados
-│       ├── xss-payloads.txt            # Payloads XSS usados
-│       └── path-traversal-payloads.txt # Payloads Path Traversal
-└── screenshots/
-    ├── lynis-before.png                # Captura inicial Lynis
-    ├── lynis-after.png                 # Captura final Lynis
-    ├── mobile-analysis.png             # Análisis del móvil
-    ├── zap-proxy-config.png            # Configuración del proxy
-    ├── zap-certificate.png             # Importación de certificado
-    ├── sql-injection-poc.png           # Prueba de concepto SQL Injection
-    ├── xss-reflected-poc.png           # Prueba de concepto XSS Reflejado
-    ├── xss-stored-poc.png              # Prueba de concepto XSS Almacenado
-    ├── path-traversal-poc.png          # Prueba de concepto Path Traversal
-    └── csrf-poc.png                    # Prueba de concepto CSRF
-```
-
----
 
 ## Resumen Ejecutivo
 
