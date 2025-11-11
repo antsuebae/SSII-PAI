@@ -1,0 +1,165 @@
+================================================================================
+INFORME MENSUAL DE SEGURIDAD - SURICATA IDS
+================================================================================
+Fecha de generación: 2025-11-11 13:31:30
+Archivo analizado: /home/suero/Escritorio/SSII/SSII-PAI/PAI_4/logs-evidencia/suricata-fast.log
+================================================================================
+
+1. RESUMEN EJECUTIVO
+--------------------------------------------------------------------------------
+
+Total de alertas detectadas: 20
+
+Distribución por severidad:
+  • CRÍTICO   :    7 alertas ( 35.0%)
+  • ALTO      :    3 alertas ( 15.0%)
+  • MEDIO     :    6 alertas ( 30.0%)
+  • BAJO      :    4 alertas ( 20.0%)
+
+Distribución por tipo de incidente:
+  • ATAQUE         :   10 alertas ( 50.0%)
+  • ALERTA         :    6 alertas ( 30.0%)
+  • RECONOCIMIENTO :    4 alertas ( 20.0%)
+
+
+2. ALERTAS POR SERVICIO
+--------------------------------------------------------------------------------
+
+2.1. Servicio: HTTP
+----------------------------------------
+Total de alertas: 8
+
+Distribución por tipo:
+  • ATAQUE: 4 alertas
+  • ALERTA: 3 alertas
+  • RECONOCIMIENTO: 1 alertas
+
+Reglas activadas (SID):
+  • SID 1000001: 3 veces - Acceso HTTP no autorizado (puerto 8083)
+  • SID 1000003: 3 veces - Intento de SQL Injection
+  • SID 1000004: 1 veces - Intento de Cross-Site Scripting (XSS)
+  • SID 1000010: 1 veces - Escaneo Nmap SYN detectado
+
+Top 5 IPs atacantes:
+  • 203.0.113.25: 4 intentos
+  • 91.203.5.32: 1 intentos
+  • 198.51.100.23: 1 intentos
+  • 185.220.101.45: 1 intentos
+  • 45.142.215.98: 1 intentos
+
+
+2.2. Servicio: HTTPS
+----------------------------------------
+Total de alertas: 3
+
+Distribución por tipo:
+  • ALERTA: 1 alertas
+  • RECONOCIMIENTO: 1 alertas
+  • ATAQUE: 1 alertas
+
+Reglas activadas (SID):
+  • SID 1000002: 1 veces - Acceso HTTPS no autorizado (puerto 8443)
+  • SID 1000010: 1 veces - Escaneo Nmap SYN detectado
+  • SID 1000004: 1 veces - Intento de Cross-Site Scripting (XSS)
+
+Top 5 IPs atacantes:
+  • 91.203.5.32: 2 intentos
+  • 45.142.215.98: 1 intentos
+
+
+2.3. Servicio: MySQL
+----------------------------------------
+Total de alertas: 4
+
+Distribución por tipo:
+  • ATAQUE: 3 alertas
+  • RECONOCIMIENTO: 1 alertas
+
+Reglas activadas (SID):
+  • SID 1000005: 2 veces - Acceso MySQL no autorizado (puerto 3336)
+  • SID 1000006: 1 veces - Intento de fuerza bruta MySQL
+  • SID 1000010: 1 veces - Escaneo Nmap SYN detectado
+
+Top 5 IPs atacantes:
+  • 203.0.113.25: 3 intentos
+  • 91.203.5.32: 1 intentos
+
+
+2.4. Servicio: SSH/SFTP
+----------------------------------------
+Total de alertas: 4
+
+Distribución por tipo:
+  • ALERTA: 2 alertas
+  • ATAQUE: 1 alertas
+  • RECONOCIMIENTO: 1 alertas
+
+Reglas activadas (SID):
+  • SID 1000007: 2 veces - Acceso SSH no autorizado (puerto 2288)
+  • SID 1000008: 1 veces - Intento de fuerza bruta SSH
+  • SID 1000010: 1 veces - Escaneo Nmap SYN detectado
+
+Top 5 IPs atacantes:
+  • 185.220.101.45: 3 intentos
+  • 91.203.5.32: 1 intentos
+
+
+2.5. Servicio: OTRO
+----------------------------------------
+Total de alertas: 1
+
+Distribución por tipo:
+  • ATAQUE: 1 alertas
+
+Reglas activadas (SID):
+  • SID 1000011: 1 veces - Posible ICMP Flood (DoS)
+
+Top 5 IPs atacantes:
+  • 203.0.113.77: 1 intentos
+
+
+
+3. TOP 10 IPs ATACANTES (GLOBAL)
+--------------------------------------------------------------------------------
+
+#    IP Address         Alertas    Porcentaje
+--------------------------------------------------------------------------------
+1    203.0.113.25       7           35.0%
+2    91.203.5.32        5           25.0%
+3    185.220.101.45     4           20.0%
+4    45.142.215.98      2           10.0%
+5    198.51.100.23      1            5.0%
+6    203.0.113.77       1            5.0%
+
+
+4. SISTEMAS OBJETIVO
+--------------------------------------------------------------------------------
+
+IP Objetivo        Alertas    Porcentaje
+--------------------------------------------------------------------------------
+192.168.1.10       12          60.0%
+192.168.1.11       4           20.0%
+192.168.1.12       4           20.0%
+
+
+5. RECOMENDACIONES
+--------------------------------------------------------------------------------
+
+⚠️  ACCIÓN INMEDIATA REQUERIDA:
+   Se detectaron 7 alertas de severidad CRÍTICA.
+   • Revisar intentos de SQL Injection y XSS
+   • Verificar accesos no autorizados a MySQL
+   • Implementar WAF si no está presente
+
+📋 IPs RECOMENDADAS PARA BLOQUEO:
+   • 203.0.113.25
+
+🔧 MANTENIMIENTO:
+   • Actualizar feeds de Suricata semanalmente
+   • Revisar falsos positivos en logs
+   • Ajustar thresholds si es necesario
+   • Mantener backups de configuración
+
+================================================================================
+FIN DEL INFORME
+================================================================================
