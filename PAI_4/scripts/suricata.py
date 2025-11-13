@@ -14,7 +14,7 @@ Funcionalidades:
 - Clasificación por tipo de ataque
 - Generación de informes TXT y HTML
 
-Autor: Security Team ST-XX
+Autor: Security Team ST-25
 Fecha: Noviembre 2025
 """
 
@@ -757,7 +757,7 @@ class SuricataLogAnalyzer:
 
         <footer>
             <p><strong>Informe generado por Suricata Log Analyzer</strong></p>
-            <p>Security Team ST-XX | PAI-4 Project</p>
+            <p>Security Team ST-25 | PAI-4 Project</p>
             <p>Universidad de Sevilla - E.T.S. Ingeniería Informática</p>
         </footer>
     </div>
