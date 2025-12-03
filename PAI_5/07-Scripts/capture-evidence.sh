@@ -353,7 +353,8 @@ list_evidences() {
     if [ -d "$SCREENSHOTS_DIR" ] && [ -n "$(ls -A "$SCREENSHOTS_DIR" 2>/dev/null | grep -v '\.meta\.json$')" ]; then
         echo -e "${CYAN}Screenshots:${NC}"
         echo ""
-        for file in "$SCREENSHOTS_DIR"/*.png 2>/dev/null; do
+        shopt -s nullglob
+        for file in "$SCREENSHOTS_DIR"/*.png; do
             if [ -f "$file" ]; then
                 total=$((total + 1))
                 local basename=$(basename "$file")
@@ -368,6 +369,7 @@ list_evidences() {
                 fi
             fi
         done
+        shopt -u nullglob
         echo ""
     fi
 
@@ -375,7 +377,8 @@ list_evidences() {
     if [ -d "$NETWORK_CAPTURES_DIR" ] && [ -n "$(ls -A "$NETWORK_CAPTURES_DIR" 2>/dev/null | grep -v '\.meta\.json$')" ]; then
         echo -e "${CYAN}Capturas de Red:${NC}"
         echo ""
-        for file in "$NETWORK_CAPTURES_DIR"/*.pcap 2>/dev/null; do
+        shopt -s nullglob
+        for file in "$NETWORK_CAPTURES_DIR"/*.pcap; do
             if [ -f "$file" ]; then
                 total=$((total + 1))
                 local basename=$(basename "$file")
@@ -383,6 +386,7 @@ list_evidences() {
                 echo "  [$total] $basename ($(numfmt --to=iec-i --suffix=B $size 2>/dev/null || echo "$size bytes"))"
             fi
         done
+        shopt -u nullglob
         echo ""
     fi
 
@@ -456,7 +460,8 @@ EOF
     echo "|---|---------|------|---------|-------------|--------|" >> "$output_file"
 
     local count=1
-    for file in "$SCREENSHOTS_DIR"/*.png 2>/dev/null; do
+    shopt -s nullglob
+    for file in "$SCREENSHOTS_DIR"/*.png; do
         if [ -f "$file" ]; then
             local basename=$(basename "$file")
             local meta="${file}.meta.json"
@@ -475,6 +480,7 @@ EOF
             count=$((count + 1))
         fi
     done
+    shopt -u nullglob
 
     echo "" >> "$output_file"
 
@@ -485,7 +491,8 @@ EOF
     echo "|---|---------|------|--------|" >> "$output_file"
 
     count=1
-    for file in "$NETWORK_CAPTURES_DIR"/*.pcap 2>/dev/null; do
+    shopt -s nullglob
+    for file in "$NETWORK_CAPTURES_DIR"/*.pcap; do
         if [ -f "$file" ]; then
             local basename=$(basename "$file")
             local size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
@@ -501,6 +508,7 @@ EOF
             count=$((count + 1))
         fi
     done
+    shopt -u nullglob
 
     echo "" >> "$output_file"
     echo "---" >> "$output_file"
