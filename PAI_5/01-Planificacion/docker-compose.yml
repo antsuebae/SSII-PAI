@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # DVWA Web Application
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: dvwa
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      # Configuración de PHP
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_DISPLAY_STARTUP_ERRORS=1
+      # Configuración de base de datos
+      - DB_SERVER=db
+      - DB_DATABASE=dvwa
+      - DB_USERNAME=dvwa
+      - DB_PASSWORD=dvwa_password
+      # Nivel de seguridad por defecto (low, medium, high, impossible)
+      - SECURITY_LEVEL=low
+      # Recaptcha (deshabilitado para pentesting)
+      - RECAPTCHA_PUBLIC_KEY=
+      - RECAPTCHA_PRIVATE_KEY=
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - dvwa_network
+    volumes:
+      # Persistir configuración
+      - dvwa_data:/var/www/html
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # MySQL Database para DVWA
+  db:
+    image: mysql:5.7
+    container_name: dvwa_db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=dvwa
+      - MYSQL_USER=dvwa
+      - MYSQL_PASSWORD=dvwa_password
+    ports:
+      - "3306:3306"
+    networks:
+      - dvwa_network
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  dvwa_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  dvwa_data:
+    driver: local
+  db_data:
+    driver: local
