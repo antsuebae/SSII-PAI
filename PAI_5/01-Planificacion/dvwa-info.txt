@@ -1,0 +1,20 @@
+DVWA Configuration
+==================
+Deployment Date: Wed Dec  3 12:53:34 PM EST 2025
+Container IP: 172.20.0.3
+Access URL: http://172.20.0.3 or http://localhost:80
+Default Credentials:
+  Username: admin
+  Password: password
+
+First Steps:
+1. Access DVWA web interface
+2. Click on "Create / Reset Database" button
+3. Login with admin/password
+4. Set security level in "DVWA Security" page
+
+Docker Commands:
+  Start: docker compose -f /home/kali/Desktop/SSII-PAI/PAI_5/01-Planificacion/docker-compose.yml up -d
+  Stop: docker compose -f /home/kali/Desktop/SSII-PAI/PAI_5/01-Planificacion/docker-compose.yml down
+  Logs: docker compose -f /home/kali/Desktop/SSII-PAI/PAI_5/01-Planificacion/docker-compose.yml logs -f
+  Status: docker compose -f /home/kali/Desktop/SSII-PAI/PAI_5/01-Planificacion/docker-compose.yml ps

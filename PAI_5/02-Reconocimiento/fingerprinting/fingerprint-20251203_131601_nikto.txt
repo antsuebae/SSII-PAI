@@ -1,0 +1,25 @@
+- Nikto v2.5.0
+---------------------------------------------------------------------------
++ Target IP:          127.0.0.1
++ Target Hostname:    localhost
++ Target Port:        80
++ Start Time:         2025-12-03 13:18:05 (GMT-5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.25 (Debian)
++ /: Cookie PHPSESSID created without the httponly flag. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies
++ /: Cookie security created without the httponly flag. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies
++ /: The anti-clickjacking X-Frame-Options header is not present. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
++ /: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/
++ Root page / redirects to: login.php
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.25 appears to be outdated (current is at least Apache/2.4.54). Apache 2.2.34 is the EOL for the 2.x branch.
++ /config/: Directory indexing found.
++ /config/: Configuration information may be available remotely.
++ /docs/: Directory indexing found.
++ /icons/README: Apache default file found. See: https://www.vntweb.co.uk/apache-restricting-access-to-iconsreadme/
++ /login.php: Admin login page/section found.
++ /.gitignore: .gitignore file found. It is possible to grasp the directory structure.
++ 7850 requests: 0 error(s) and 11 item(s) reported on remote host
++ End Time:           2025-12-03 13:18:12 (GMT-5) (7 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested

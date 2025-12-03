@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Wed Dec  3 13:17:43 2025 as: /usr/lib/nmap/nmap -sU --top-ports 100 -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-udp-20251203_131601 localhost
+Host: 127.0.0.1 (localhost)	Status: Up
+Host: 127.0.0.1 (localhost)	Ports: 	Ignored State: closed (100)
+# Nmap done at Wed Dec  3 13:17:43 2025 -- 1 IP address (1 host up) scanned in 0.11 seconds
