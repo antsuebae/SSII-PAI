@@ -59,16 +59,28 @@ else
         sudo dnf -y install dnf-plugins-core
         sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
         sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    elif grep -qi "kali" /etc/os-release 2>/dev/null; then
+        info "Detectado: Kali Linux"
+        info "Instalando Docker desde repositorios de Kali..."
+        sudo apt-get update
+        sudo apt-get install -y docker.io docker-compose
     elif [ -f /etc/debian_version ]; then
-        info "Detectado: Debian/Ubuntu/Kali Linux"
+        info "Detectado: Debian/Ubuntu"
         sudo apt-get update
         sudo apt-get install -y ca-certificates curl gnupg
         sudo install -m 0755 -d /etc/apt/keyrings
         curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
         sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+        # Usar bookworm como fallback para versiones no soportadas
+        DEBIAN_VERSION=$(. /etc/os-release && echo "$VERSION_CODENAME")
+        if [ -z "$DEBIAN_VERSION" ] || [ "$DEBIAN_VERSION" = "kali-rolling" ]; then
+            DEBIAN_VERSION="bookworm"
+        fi
+
         echo \
           "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-          "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+          $DEBIAN_VERSION stable" | \
           sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         sudo apt-get update
         sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
