@@ -118,7 +118,7 @@ Todas las técnicas de ataque están mapeadas a MITRE ATT&CK para Enterprise:
 | Setup | Wed Dec  3 12:53:34 PM EST 2025 | Despliegue de DVWA |
 | Reconocimiento | 2025-12-03 13:35:14 | Escaneos Nmap y fingerprinting |
 | Escaneo Vulns | 2025-12-04 12:23:49 | Nikto, SQLMap, análisis de seguridad |
-| Captura Evidencias | 2025-12-04 03:35:38 | Screenshots y logs |
+| Captura Evidencias | 2025-12-04 12:28:03 | Screenshots y logs |
 
 ## 3. Fase de Reconocimiento
 
@@ -230,15 +230,16 @@ Ver sección 6 (Hallazgos Detallados) para información completa de cada vulnera
 
 ### Evidencias Capturadas
 
-- **Screenshots**: 4 archivos
+- **Screenshots**: 5 archivos
 - **Logs**: 3 archivos
 - **Capturas de red**: 0 archivos
 
 #### Screenshots Recientes
 
+- `003_exploit_sqli_users-extraction-complete.png`
+- `002_exploit_sqli_descripcion.png`
 - `001_exploit_sqli_users-extraction-complete.png`
 - `003_exploit_sqli_database-dump.png`
-- `002_exploit_sqli_descripcion.png`
 - `001_exploit_sqli_descripcion.png`
 
 
@@ -439,7 +440,7 @@ Las vulnerabilidades más críticas identificadas son:
 
 ```
 06-Evidencias/
-├── screenshots/          # 4 archivos
+├── screenshots/          # 5 archivos
 ├── logs/                 # 3 archivos
 └── network-captures/     # 0 archivos
 ```
@@ -460,5 +461,5 @@ Ver archivo: `08-Informe/mapeo-attack.md`
 
 **Fin del Informe Técnico**
 
-*Generado automáticamente el 2025-12-04 12:24:06*
+*Generado automáticamente el 2025-12-04 12:28:10*
 
