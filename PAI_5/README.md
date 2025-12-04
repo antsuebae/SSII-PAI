@@ -120,7 +120,8 @@ PAI_5/
 │   └── Informe-Tecnico-Final.pdf  # Informe final (generado)
 │
 ├── CLAUDE.md                      # Documentación para Claude Code
-└── README.md                      # Este archivo
+├── README.md                      # Este archivo
+└── ejecutar-pentesting.sh         # 🚀 SCRIPT MAESTRO - Ejecuta todo
 ```
 
 ## 🔧 Requisitos Previos
