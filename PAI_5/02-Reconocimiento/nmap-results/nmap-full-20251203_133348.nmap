@@ -1,0 +1,11 @@
+# Nmap 7.95 scan initiated Wed Dec  3 13:34:32 2025 as: /usr/lib/nmap/nmap --privileged -p- -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-full-20251203_133348 localhost
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000020s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 65532 closed tcp ports (reset)
+PORT      STATE SERVICE
+80/tcp    open  http
+3306/tcp  open  mysql
+36753/tcp open  unknown
+
+# Nmap done at Wed Dec  3 13:34:33 2025 -- 1 IP address (1 host up) scanned in 0.38 seconds

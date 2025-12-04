@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Thu Dec  4 03:32:07 2025 as: /usr/lib/nmap/nmap --privileged --script vuln -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-vuln-20251204_033200 localhost
+Host: 127.0.0.1 (localhost)	Status: Up
+Host: 127.0.0.1 (localhost)	Ports: 80/open/tcp//http///, 3306/open/tcp//mysql///	Ignored State: closed (998)
+# Nmap done at Thu Dec  4 03:32:42 2025 -- 1 IP address (1 host up) scanned in 35.32 seconds

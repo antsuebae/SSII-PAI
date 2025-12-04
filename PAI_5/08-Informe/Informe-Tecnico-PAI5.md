@@ -3,7 +3,7 @@
 
 **Proyecto**: PAI-5 RedTeamPro
 **Universidad**: Universidad de Sevilla - SSII
-**Fecha**: 2025-12-03
+**Fecha**: 2025-12-04
 **Autor**: [Tu Nombre]
 **Versión**: 1.0
 
@@ -20,7 +20,7 @@ Este informe documenta los resultados de la evaluación de seguridad realizada s
 - **Target**: DVWA en Docker (http://localhost:80)
 - **Tipo de testing**: White Box
 - **Metodología**: NIST 800-115 + MITRE ATT&CK
-- **Duración**: 2025-12-03
+- **Duración**: 2025-12-04
 - **Nivel de seguridad DVWA**: Low/Medium/High
 
 ### Hallazgos Clave
@@ -80,6 +80,7 @@ Todas las técnicas de ataque están mapeadas a MITRE ATT&CK para Enterprise:
 ### Técnicas MITRE ATT&CK Identificadas
 
 - **T1046**: Network Service Scanning
+- **T1082**: System Information Discovery
 - **T1083**: File and Directory Discovery
 - **T1590.002**: Gather Victim Network Information: DNS
 - **T1593**: Search Open Websites/Domains
@@ -115,8 +116,9 @@ Todas las técnicas de ataque están mapeadas a MITRE ATT&CK para Enterprise:
 | Fase | Fecha/Hora | Descripción |
 |------|------------|-------------|
 | Setup | Wed Dec  3 12:53:34 PM EST 2025 | Despliegue de DVWA |
-| Reconocimiento | 2025-12-03 13:18:05 | Escaneos Nmap y fingerprinting |
-| Escaneo Vulns | 2025-12-03 13:18:44 | Nikto, SQLMap, análisis de seguridad |
+| Reconocimiento | 2025-12-03 13:35:14 | Escaneos Nmap y fingerprinting |
+| Escaneo Vulns | 2025-12-03 13:36:20 | Nikto, SQLMap, análisis de seguridad |
+| Captura Evidencias | 2025-12-04 03:35:38 | Screenshots y logs |
 
 ## 3. Fase de Reconocimiento
 
@@ -129,23 +131,23 @@ Todas las técnicas de ataque están mapeadas a MITRE ATT&CK para Enterprise:
 
 ### Escaneos Ejecutados
 
-**Total de escaneos Nmap**: 5
+**Total de escaneos Nmap**: 17
 
 ### Resumen de Escaneo Nmap
 
 ```
 PORT     STATE SERVICE VERSION
 80/tcp   open  http    Apache httpd 2.4.25 ((Debian))
+| http-robots.txt: 1 disallowed entry 
+|_/
 | http-title: Login :: Damn Vulnerable Web Application (DVWA) v1.10 *Develop...
 |_Requested resource was login.php
-| http-cookie-flags: 
-|   /: 
 ```
 
 
 ### Fingerprinting Web
 
-**Archivos de fingerprinting**: 9
+**Archivos de fingerprinting**: 25
 
 #### Tecnologías Detectadas
 
@@ -166,11 +168,11 @@ PORT     STATE SERVICE VERSION
 
 ### Archivos Generados
 
-- `nmap-udp-20251203_131601.gnmap`
-- `nmap-udp-20251203_131601.nmap`
-- `nmap-udp-20251203_131601.xml`
-- `nmap-full-20251203_131601.gnmap`
-- `nmap-full-20251203_131601.nmap`
+- `nmap-udp-20251204_033200.gnmap`
+- `nmap-udp-20251204_033200.nmap`
+- `nmap-udp-20251204_033200.xml`
+- `nmap-os-20251204_033200.gnmap`
+- `nmap-os-20251204_033200.nmap`
 ## 4. Fase de Escaneo de Vulnerabilidades
 
 ### Objetivos
@@ -184,7 +186,7 @@ PORT     STATE SERVICE VERSION
 
 #### Nikto Web Scanner
 
-- **Escaneos realizados**: 1
+- **Escaneos realizados**: 3
 
 ### Vulnerabilidades Críticas (Nikto)
 
@@ -212,24 +214,30 @@ Ver sección 6 (Hallazgos Detallados) para información completa de cada vulnera
 ### Archivos Generados
 
 **Nikto:**
-- `nikto-scan-20251203_131837.html`
-- `nikto-scan-20251203_131837.txt`
+- `nikto-scan-20251204_033349.txt`
+- `nikto-scan-20251204_033349.html`
+- `nikto-scan-20251203_133613.html`
 
 **Reportes de vulnerabilidades:**
-- `vulnerability-report-20251203_131837.md`
-- `scan-20251203_131837_gobuster.txt`
-- `scan-20251203_131837_dirs.txt`
-- `scan-20251203_131837_methods.txt`
-- `scan-20251203_131837_headers.txt`
+- `scan-20251204_033349_gobuster.txt`
+- `scan-20251204_033349_dirs.txt`
+- `scan-20251204_033349_methods.txt`
+- `scan-20251204_033349_headers.txt`
+- `vulnerability-report-20251203_133613.md`
 ## 5. Evidencias y Documentación
 
 ### Resumen de Evidencias Capturadas
 
 ### Evidencias Capturadas
 
-- **Screenshots**: 0 archivos
+- **Screenshots**: 2 archivos
 - **Logs**: 3 archivos
 - **Capturas de red**: 0 archivos
+
+#### Screenshots Recientes
+
+- `002_exploit_sqli_descripcion.png`
+- `001_exploit_sqli_descripcion.png`
 
 
 ### Logging y Trazabilidad
@@ -429,7 +437,7 @@ Las vulnerabilidades más críticas identificadas son:
 
 ```
 06-Evidencias/
-├── screenshots/          # 0 archivos
+├── screenshots/          # 2 archivos
 ├── logs/                 # 3 archivos
 └── network-captures/     # 0 archivos
 ```
@@ -450,5 +458,5 @@ Ver archivo: `08-Informe/mapeo-attack.md`
 
 **Fin del Informe Técnico**
 
-*Generado automáticamente el 2025-12-03 13:22:56*
+*Generado automáticamente el 2025-12-04 03:36:36*
 

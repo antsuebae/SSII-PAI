@@ -1,0 +1,131 @@
+WhatWeb report for [1m[34mhttp://localhost:80[0m
+Status    : 302 Found
+Title     : [1m[33m<None>[0m
+IP        : <Unknown>
+Country   : [1m[31m<Unknown>[0m
+
+Summary   : [1mApache[0m[[1m[32m2.4.25[0m], [1mCookies[0m[[0m[22mPHPSESSID,security[0m], [1mHTTPServer[0m[[1m[31mDebian Linux[0m][[1m[36mApache/2.4.25 (Debian)[0m], [1mRedirectLocation[0m[[0m[22mlogin.php[0m]
+
+Detected Plugins:
+[ [1mApache[0m ]
+	The Apache HTTP Server Project is an effort to develop and 
+	maintain an open-source HTTP server for modern operating 
+	systems including UNIX and Windows NT. The goal of this 
+	project is to provide a secure, efficient and extensible 
+	server that provides HTTP services in sync with the current 
+	HTTP standards. 
+
+	Version      : [1m[32m2.4.25[0m (from HTTP Server Header)
+	Google Dorks: (3)
+	Website     : http://httpd.apache.org/
+
+[ [1mCookies[0m ]
+	Display the names of cookies in the HTTP headers. The 
+	values are not returned to save on space. 
+
+	String       : [1m[36mPHPSESSID[0m
+	String       : [1m[36mPHPSESSID[0m
+	String       : [1m[36msecurity[0m
+
+[ [1mHTTPServer[0m ]
+	HTTP server header string. This plugin also attempts to 
+	identify the operating system from the server header. 
+
+	OS           : [1m[31mDebian Linux[0m
+	String       : [1m[36mApache/2.4.25 (Debian)[0m (from server string)
+
+[ [1mRedirectLocation[0m ]
+	HTTP Server string location. used with http-status 301 and 
+	302 
+
+	String       : [1m[36mlogin.php[0m (from location)
+
+HTTP Headers:
+	HTTP/1.1 302 Found
+	Date: Thu, 04 Dec 2025 08:33:01 GMT
+	Server: Apache/2.4.25 (Debian)
+	Set-Cookie: PHPSESSID=uedbaon7vpofb2n2rscqa34vt5; path=/
+	Expires: Thu, 19 Nov 1981 08:52:00 GMT
+	Cache-Control: no-store, no-cache, must-revalidate
+	Pragma: no-cache
+	Set-Cookie: PHPSESSID=uedbaon7vpofb2n2rscqa34vt5; path=/
+	Set-Cookie: security=low
+	Location: login.php
+	Content-Length: 0
+	Connection: close
+	Content-Type: text/html; charset=UTF-8
+	
+WhatWeb report for [1m[34mhttp://localhost/login.php[0m
+Status    : 200 OK
+Title     : [1m[33mLogin :: Damn Vulnerable Web Application (DVWA) v1.10 *Development*[0m
+IP        : <Unknown>
+Country   : [1m[31m<Unknown>[0m
+
+Summary   : [1mApache[0m[[1m[32m2.4.25[0m], [1mCookies[0m[[0m[22mPHPSESSID,security[0m], [1mDVWA[0m, [1mHTTPServer[0m[[1m[31mDebian Linux[0m][[1m[36mApache/2.4.25 (Debian)[0m], [1mPasswordField[0m[[0m[22mpassword[0m], [1mPHP[0m
+
+Detected Plugins:
+[ [1mApache[0m ]
+	The Apache HTTP Server Project is an effort to develop and 
+	maintain an open-source HTTP server for modern operating 
+	systems including UNIX and Windows NT. The goal of this 
+	project is to provide a secure, efficient and extensible 
+	server that provides HTTP services in sync with the current 
+	HTTP standards. 
+
+	Version      : [1m[32m2.4.25[0m (from HTTP Server Header)
+	Google Dorks: (3)
+	Website     : http://httpd.apache.org/
+
+[ [1mCookies[0m ]
+	Display the names of cookies in the HTTP headers. The 
+	values are not returned to save on space. 
+
+	String       : [1m[36mPHPSESSID[0m
+	String       : [1m[36mPHPSESSID[0m
+	String       : [1m[36msecurity[0m
+
+[ [1mDVWA[0m ]
+	Damn Vulnerable Web App (DVWA) is a PHP/MySQL web 
+	application that is damn vulnerable. 
+
+	Google Dorks: (1)
+	Website     : http://www.dvwa.co.uk/
+
+[ [1mHTTPServer[0m ]
+	HTTP server header string. This plugin also attempts to 
+	identify the operating system from the server header. 
+
+	OS           : [1m[31mDebian Linux[0m
+	String       : [1m[36mApache/2.4.25 (Debian)[0m (from server string)
+
+[ [1mPHP[0m ]
+	PHP is a widely-used general-purpose scripting language 
+	that is especially suited for Web development and can be 
+	embedded into HTML. This plugin identifies PHP errors, 
+	modules and versions and extracts the local file path and 
+	username if present. 
+
+	Google Dorks: (3)
+	Website     : http://www.php.net/
+
+[ [1mPasswordField[0m ]
+	find password fields 
+
+	String       : [1m[36mpassword[0m (from field name)
+
+HTTP Headers:
+	HTTP/1.1 200 OK
+	Date: Thu, 04 Dec 2025 08:33:02 GMT
+	Server: Apache/2.4.25 (Debian)
+	Set-Cookie: PHPSESSID=p8gm390tokkaftg07eetjsr7s1; path=/
+	Expires: Tue, 23 Jun 2009 12:00:00 GMT
+	Cache-Control: no-cache, must-revalidate
+	Pragma: no-cache
+	Set-Cookie: PHPSESSID=p8gm390tokkaftg07eetjsr7s1; path=/
+	Set-Cookie: security=low
+	Vary: Accept-Encoding
+	Content-Encoding: gzip
+	Content-Length: 699
+	Connection: close
+	Content-Type: text/html;charset=utf-8
+	

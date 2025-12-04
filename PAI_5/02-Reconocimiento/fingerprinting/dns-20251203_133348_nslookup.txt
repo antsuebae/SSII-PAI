@@ -1,0 +1,8 @@
+Server:		10.0.2.3
+Address:	10.0.2.3#53
+
+Name:	localhost
+Address: 127.0.0.1
+Name:	localhost
+Address: ::1
+

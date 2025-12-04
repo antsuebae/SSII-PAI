@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-12-03T13:22:44.746043",
-  "total_findings": 1,
+  "timestamp": "2025-12-04T03:34:23.004883",
+  "total_findings": 5,
   "matrix": {
     "Reconnaissance": [],
     "Initial Access": [],
@@ -14,6 +14,11 @@
         "id": "T1046",
         "finding": "Service enumeration executed",
         "source": "nmap"
+      },
+      {
+        "id": "T1082",
+        "finding": "OS detection executed",
+        "source": "nmap"
       }
     ],
     "Collection": [],
@@ -24,7 +29,51 @@
       "source": "nmap",
       "type": "service_enum",
       "description": "Service enumeration executed",
+      "file": "nmap-service-20251203_133348.nmap",
+      "techniques": [
+        "T1046"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "Service Enumeration"
+    },
+    {
+      "source": "nmap",
+      "type": "service_enum",
+      "description": "Service enumeration executed",
       "file": "nmap-service-20251203_131601.nmap",
+      "techniques": [
+        "T1046"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "Service Enumeration"
+    },
+    {
+      "source": "nmap",
+      "type": "os_detection",
+      "description": "OS detection executed",
+      "file": "nmap-os-20251204_033200.nmap",
+      "techniques": [
+        "T1082"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "OS Detection"
+    },
+    {
+      "source": "nmap",
+      "type": "os_detection",
+      "description": "OS detection executed",
+      "file": "nmap-os-20251203_133348.nmap",
+      "techniques": [
+        "T1082"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "OS Detection"
+    },
+    {
+      "source": "nmap",
+      "type": "service_enum",
+      "description": "Service enumeration executed",
+      "file": "nmap-service-20251204_033200.nmap",
       "techniques": [
         "T1046"
       ],
