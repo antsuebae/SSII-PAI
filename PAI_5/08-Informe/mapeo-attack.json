@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-12-04T03:34:23.004883",
-  "total_findings": 5,
+  "timestamp": "2025-12-04T12:24:04.358346",
+  "total_findings": 16,
   "matrix": {
     "Reconnaissance": [],
     "Initial Access": [],
@@ -11,13 +11,13 @@
     "Credential Access": [],
     "Discovery": [
       {
-        "id": "T1046",
-        "finding": "Service enumeration executed",
+        "id": "T1082",
+        "finding": "OS detection executed",
         "source": "nmap"
       },
       {
-        "id": "T1082",
-        "finding": "OS detection executed",
+        "id": "T1046",
+        "finding": "Service enumeration executed",
         "source": "nmap"
       }
     ],
@@ -25,6 +25,17 @@
     "Exfiltration": []
   },
   "findings": [
+    {
+      "source": "nmap",
+      "type": "os_detection",
+      "description": "OS detection executed",
+      "file": "nmap-os-20251204_122141.nmap",
+      "techniques": [
+        "T1082"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "OS Detection"
+    },
     {
       "source": "nmap",
       "type": "service_enum",
@@ -51,12 +62,45 @@
       "source": "nmap",
       "type": "os_detection",
       "description": "OS detection executed",
+      "file": "nmap-os-20251204_035636.nmap",
+      "techniques": [
+        "T1082"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "OS Detection"
+    },
+    {
+      "source": "nmap",
+      "type": "os_detection",
+      "description": "OS detection executed",
+      "file": "nmap-os-20251204_055301.nmap",
+      "techniques": [
+        "T1082"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "OS Detection"
+    },
+    {
+      "source": "nmap",
+      "type": "os_detection",
+      "description": "OS detection executed",
       "file": "nmap-os-20251204_033200.nmap",
       "techniques": [
         "T1082"
       ],
       "tactic": "Discovery",
       "attack_description": "OS Detection"
+    },
+    {
+      "source": "nmap",
+      "type": "service_enum",
+      "description": "Service enumeration executed",
+      "file": "nmap-service-20251204_055301.nmap",
+      "techniques": [
+        "T1046"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "Service Enumeration"
     },
     {
       "source": "nmap",
@@ -73,12 +117,77 @@
       "source": "nmap",
       "type": "service_enum",
       "description": "Service enumeration executed",
+      "file": "nmap-service-20251204_122141.nmap",
+      "techniques": [
+        "T1046"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "Service Enumeration"
+    },
+    {
+      "source": "nmap",
+      "type": "service_enum",
+      "description": "Service enumeration executed",
       "file": "nmap-service-20251204_033200.nmap",
       "techniques": [
         "T1046"
       ],
       "tactic": "Discovery",
       "attack_description": "Service Enumeration"
+    },
+    {
+      "source": "nmap",
+      "type": "service_enum",
+      "description": "Service enumeration executed",
+      "file": "nmap-service-20251204_035636.nmap",
+      "techniques": [
+        "T1046"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "Service Enumeration"
+    },
+    {
+      "source": "nmap",
+      "type": "service_enum",
+      "description": "Service enumeration executed",
+      "file": "nmap-service-20251204_122027.nmap",
+      "techniques": [
+        "T1046"
+      ],
+      "tactic": "Discovery",
+      "attack_description": "Service Enumeration"
+    },
+    {
+      "source": "evidence",
+      "attack_id": "T1213",
+      "phase": "exploit",
+      "technique": "sqli",
+      "description": "database-dump",
+      "file": "003_exploit_sqli_database-dump.png"
+    },
+    {
+      "source": "evidence",
+      "attack_id": "T1213",
+      "phase": "exploit",
+      "technique": "sqli",
+      "description": "users-extraction-complete",
+      "file": "001_exploit_sqli_users-extraction-complete.png"
+    },
+    {
+      "source": "evidence",
+      "attack_id": "T1213",
+      "phase": "exploit",
+      "technique": "sqli",
+      "description": "descripcion",
+      "file": "001_exploit_sqli_descripcion.png"
+    },
+    {
+      "source": "evidence",
+      "attack_id": "T1213",
+      "phase": "exploit",
+      "technique": "sqli",
+      "description": "descripcion",
+      "file": "002_exploit_sqli_descripcion.png"
     }
   ]
 }

@@ -1,0 +1,15 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0   0     0   0     0     0     0  --:--:-- --:--:-- --:--:--     0  0     0   0     0   0     0     0     0  --:--:-- --:--:-- --:--:--     0
+HTTP/1.1 302 Found
+Date: Thu, 04 Dec 2025 10:55:15 GMT
+Server: Apache/2.4.25 (Debian)
+Set-Cookie: PHPSESSID=7c2bu87goj39eq0f0ui3bk8l92; path=/
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: PHPSESSID=7c2bu87goj39eq0f0ui3bk8l92; path=/
+Set-Cookie: security=low
+Location: login.php
+Content-Type: text/html; charset=UTF-8
+

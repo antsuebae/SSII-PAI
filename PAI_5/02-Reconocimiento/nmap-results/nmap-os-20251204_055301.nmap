@@ -1,0 +1,16 @@
+# Nmap 7.95 scan initiated Thu Dec  4 05:54:46 2025 as: /usr/lib/nmap/nmap -O -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-os-20251204_055301 localhost
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000033s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 998 closed tcp ports (reset)
+PORT     STATE SERVICE
+80/tcp   open  http
+3306/tcp open  mysql
+Device type: general purpose
+Running: Linux 2.6.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6.32 cpe:/o:linux:linux_kernel:5 cpe:/o:linux:linux_kernel:6
+OS details: Linux 2.6.32, Linux 5.0 - 6.2
+Network Distance: 0 hops
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Dec  4 05:54:48 2025 -- 1 IP address (1 host up) scanned in 1.63 seconds

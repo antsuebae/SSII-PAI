@@ -1,0 +1,2 @@
+localhost has address 127.0.0.1
+localhost has IPv6 address ::1

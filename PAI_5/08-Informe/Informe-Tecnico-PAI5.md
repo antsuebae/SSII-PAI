@@ -117,7 +117,7 @@ Todas las técnicas de ataque están mapeadas a MITRE ATT&CK para Enterprise:
 |------|------------|-------------|
 | Setup | Wed Dec  3 12:53:34 PM EST 2025 | Despliegue de DVWA |
 | Reconocimiento | 2025-12-03 13:35:14 | Escaneos Nmap y fingerprinting |
-| Escaneo Vulns | 2025-12-03 13:36:20 | Nikto, SQLMap, análisis de seguridad |
+| Escaneo Vulns | 2025-12-04 12:23:49 | Nikto, SQLMap, análisis de seguridad |
 | Captura Evidencias | 2025-12-04 03:35:38 | Screenshots y logs |
 
 ## 3. Fase de Reconocimiento
@@ -131,7 +131,7 @@ Todas las técnicas de ataque están mapeadas a MITRE ATT&CK para Enterprise:
 
 ### Escaneos Ejecutados
 
-**Total de escaneos Nmap**: 17
+**Total de escaneos Nmap**: 38
 
 ### Resumen de Escaneo Nmap
 
@@ -147,7 +147,7 @@ PORT     STATE SERVICE VERSION
 
 ### Fingerprinting Web
 
-**Archivos de fingerprinting**: 25
+**Archivos de fingerprinting**: 49
 
 #### Tecnologías Detectadas
 
@@ -168,11 +168,11 @@ PORT     STATE SERVICE VERSION
 
 ### Archivos Generados
 
-- `nmap-udp-20251204_033200.gnmap`
-- `nmap-udp-20251204_033200.nmap`
-- `nmap-udp-20251204_033200.xml`
-- `nmap-os-20251204_033200.gnmap`
-- `nmap-os-20251204_033200.nmap`
+- `nmap-udp-20251204_122141.gnmap`
+- `nmap-udp-20251204_122141.nmap`
+- `nmap-udp-20251204_122141.xml`
+- `nmap-os-20251204_122141.gnmap`
+- `nmap-os-20251204_122141.nmap`
 ## 4. Fase de Escaneo de Vulnerabilidades
 
 ### Objetivos
@@ -186,7 +186,7 @@ PORT     STATE SERVICE VERSION
 
 #### Nikto Web Scanner
 
-- **Escaneos realizados**: 3
+- **Escaneos realizados**: 6
 
 ### Vulnerabilidades Críticas (Nikto)
 
@@ -214,28 +214,30 @@ Ver sección 6 (Hallazgos Detallados) para información completa de cada vulnera
 ### Archivos Generados
 
 **Nikto:**
-- `nikto-scan-20251204_033349.txt`
-- `nikto-scan-20251204_033349.html`
-- `nikto-scan-20251203_133613.html`
+- `nikto-scan-20251204_122341.html`
+- `nikto-scan-20251204_122341.txt`
+- `nikto-scan-20251204_055614.html`
 
 **Reportes de vulnerabilidades:**
-- `scan-20251204_033349_gobuster.txt`
-- `scan-20251204_033349_dirs.txt`
-- `scan-20251204_033349_methods.txt`
-- `scan-20251204_033349_headers.txt`
-- `vulnerability-report-20251203_133613.md`
+- `scan-20251204_122341_gobuster.txt`
+- `scan-20251204_122341_dirs.txt`
+- `scan-20251204_122341_methods.txt`
+- `scan-20251204_122341_headers.txt`
+- `scan-20251204_055614_gobuster.txt`
 ## 5. Evidencias y Documentación
 
 ### Resumen de Evidencias Capturadas
 
 ### Evidencias Capturadas
 
-- **Screenshots**: 2 archivos
+- **Screenshots**: 4 archivos
 - **Logs**: 3 archivos
 - **Capturas de red**: 0 archivos
 
 #### Screenshots Recientes
 
+- `001_exploit_sqli_users-extraction-complete.png`
+- `003_exploit_sqli_database-dump.png`
 - `002_exploit_sqli_descripcion.png`
 - `001_exploit_sqli_descripcion.png`
 
@@ -437,7 +439,7 @@ Las vulnerabilidades más críticas identificadas son:
 
 ```
 06-Evidencias/
-├── screenshots/          # 2 archivos
+├── screenshots/          # 4 archivos
 ├── logs/                 # 3 archivos
 └── network-captures/     # 0 archivos
 ```
@@ -458,5 +460,5 @@ Ver archivo: `08-Informe/mapeo-attack.md`
 
 **Fin del Informe Técnico**
 
-*Generado automáticamente el 2025-12-04 03:36:36*
+*Generado automáticamente el 2025-12-04 12:24:06*
 

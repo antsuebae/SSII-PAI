@@ -1,0 +1,8 @@
+# Nmap 7.95 scan initiated Thu Dec  4 03:57:28 2025 as: /usr/lib/nmap/nmap -sU --top-ports 100 -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-udp-20251204_035636 localhost
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000060s latency).
+Other addresses for localhost (not scanned): ::1
+All 100 scanned ports on localhost (127.0.0.1) are in ignored states.
+Not shown: 100 closed udp ports (port-unreach)
+
+# Nmap done at Thu Dec  4 03:57:28 2025 -- 1 IP address (1 host up) scanned in 0.16 seconds

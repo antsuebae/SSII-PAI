@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Thu Dec  4 12:22:51 2025 as: /usr/lib/nmap/nmap -O -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-os-20251204_122141 localhost
+Host: 127.0.0.1 (localhost)	Status: Up
+Host: 127.0.0.1 (localhost)	Ports: 80/open/tcp//http///, 3306/open/tcp//mysql///	Ignored State: closed (998)	OS: Linux 2.6.32|Linux 5.0 - 6.2	Seq Index: 262	IP ID Seq: All zeros
+# Nmap done at Thu Dec  4 12:22:52 2025 -- 1 IP address (1 host up) scanned in 1.43 seconds

@@ -1,0 +1,33 @@
+# Nmap 7.95 scan initiated Thu Dec  4 05:53:01 2025 as: /usr/lib/nmap/nmap --privileged -sV -sC -T4 -oA /home/kali/Desktop/SSII-PAI/PAI_5/02-Reconocimiento/nmap-results/nmap-service-20251204_055301 localhost
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000060s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 998 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+80/tcp   open  http    Apache httpd 2.4.25 ((Debian))
+|_http-server-header: Apache/2.4.25 (Debian)
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+| http-title: Login :: Damn Vulnerable Web Application (DVWA) v1.10 *Develop...
+|_Requested resource was login.php
+| http-robots.txt: 1 disallowed entry 
+|_/
+3306/tcp open  mysql   MySQL 5.7.44
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=MySQL_Server_5.7.44_Auto_Generated_Server_Certificate
+| Not valid before: 2025-12-03T17:53:19
+|_Not valid after:  2035-12-01T17:53:19
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.7.44
+|   Thread ID: 7146
+|   Capabilities flags: 65535
+|   Some Capabilities: FoundRows, Support41Auth, LongColumnFlag, IgnoreSpaceBeforeParenthesis, Speaks41ProtocolOld, SupportsTransactions, IgnoreSigpipes, Speaks41ProtocolNew, SupportsLoadDataLocal, ConnectWithDatabase, SwitchToSSLAfterHandshake, ODBCClient, LongPassword, SupportsCompression, InteractiveClient, DontAllowDatabaseTableColumn, SupportsMultipleResults, SupportsAuthPlugins, SupportsMultipleStatments
+|   Status: Autocommit
+|   Salt: [\x1CIq`[\x04\x1EH.\x14\x16Oh\x01gg\x0EKN
+|_  Auth Plugin Name: mysql_native_password
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Dec  4 05:53:07 2025 -- 1 IP address (1 host up) scanned in 6.59 seconds
